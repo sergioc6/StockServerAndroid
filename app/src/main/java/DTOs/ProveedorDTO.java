@@ -6,67 +6,67 @@ package DTOs;
 
 public class ProveedorDTO {
 
-    public int idProveedor;
-    public String nombreProveedor;
-    public String telefonoProveedor;
-    public String localidadProveedor;
-    public String direccionProveedor;
-    public String emailProveedor;
+    public int id_proveedor;
+    public String nombre_proveedor;
+    public String telefono;
+    public String localidad;
+    public String direccion;
+    public String email;
 
-    public ProveedorDTO(int idProveedor, String nombreProveedor, String telefonoProveedor, String localidadProveedor, String direccionProveedor, String emailProveedor) {
-        this.idProveedor = idProveedor;
-        this.nombreProveedor = nombreProveedor;
-        this.telefonoProveedor = telefonoProveedor;
-        this.localidadProveedor = localidadProveedor;
-        this.direccionProveedor = direccionProveedor;
-        this.emailProveedor = emailProveedor;
+    public ProveedorDTO(int id_proveedor, String nombre_proveedor, String telefono, String localidad, String direccion, String email) {
+        this.id_proveedor = id_proveedor;
+        this.nombre_proveedor = nombre_proveedor;
+        this.telefono = telefono;
+        this.localidad = localidad;
+        this.direccion = direccion;
+        this.email = email;
     }
 
-    public int getIdProveedor() {
-        return idProveedor;
+    public int getId_proveedor() {
+        return id_proveedor;
     }
 
-    public void setIdProveedor(int idProveedor) {
-        this.idProveedor = idProveedor;
+    public void setId_proveedor(int id_proveedor) {
+        this.id_proveedor = id_proveedor;
     }
 
-    public String getNombreProveedor() {
-        return nombreProveedor;
+    public String getNombre_proveedor() {
+        return nombre_proveedor;
     }
 
-    public void setNombreProveedor(String nombreProveedor) {
-        this.nombreProveedor = nombreProveedor;
+    public void setNombre_proveedor(String nombre_proveedor) {
+        this.nombre_proveedor = nombre_proveedor;
     }
 
-    public String getTelefonoProveedor() {
-        return telefonoProveedor;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setTelefonoProveedor(String telefonoProveedor) {
-        this.telefonoProveedor = telefonoProveedor;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public String getLocalidadProveedor() {
-        return localidadProveedor;
+    public String getLocalidad() {
+        return localidad;
     }
 
-    public void setLocalidadProveedor(String localidadProveedor) {
-        this.localidadProveedor = localidadProveedor;
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
     }
 
-    public String getDireccionProveedor() {
-        return direccionProveedor;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setDireccionProveedor(String direccionProveedor) {
-        this.direccionProveedor = direccionProveedor;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public String getEmailProveedor() {
-        return emailProveedor;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailProveedor(String emailProveedor) {
-        this.emailProveedor = emailProveedor;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
