@@ -31,6 +31,7 @@ import java.util.List;
 import DTOs.TokenDTO;
 import sergioc6.stockserverandroid.Login;
 import sergioc6.stockserverandroid.R;
+import sergioc6.stockserverandroid.TokenApplication;
 
 import static android.R.id.list;
 import static android.content.ContentValues.TAG;
@@ -75,6 +76,8 @@ public class CustomerLogin extends CustomerAPI {
 
                         TokenDTO token = gson.fromJson(mJson, collectionType);
 
+                        TokenApplication tokenApp = TokenApplication.getInstance();
+                        tokenApp.setTokenGlobal(token.getToken());
                         cargarPrincipal(token.getToken());
                     }
                 },

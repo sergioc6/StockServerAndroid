@@ -2,6 +2,7 @@ package CustomerAPI;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -56,7 +57,7 @@ public class CustomerProveedores extends CustomerAPI {
                         Type collectionType = new TypeToken<List<ProveedorDTO>>() {}.getType();
 
                         List<ProveedorDTO> listaObtenidaProveedores = gson.fromJson(mJson, collectionType);
-
+                        cargarProveedores(listaObtenidaProveedores);
                     }
                 },
                 new Response.ErrorListener() { //Tratamiento del error
@@ -82,7 +83,11 @@ public class CustomerProveedores extends CustomerAPI {
     }
 
 
-
+    public void cargarProveedores(List<ProveedorDTO> listaProveedores) {
+        Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.Proveedores.class);
+        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(myIntent);
+    }
 
 
 }
