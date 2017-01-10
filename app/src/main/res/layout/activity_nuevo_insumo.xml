@@ -63,14 +63,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinnerTipoInsumo"
         android:layout_marginTop="20dip"
-        android:prompt="@strings/tipo_insumo"/>
+        />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerSectorInsumo"
         android:layout_marginTop="20dip"
-        android:prompt="@strings/sector_insumo"/>
+        />
 
     <Button
         android:text="Registrar insumo"
