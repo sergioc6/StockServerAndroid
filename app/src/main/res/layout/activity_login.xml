@@ -41,16 +41,16 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/editTextEmail"
             android:textAlignment="viewStart"
-            android:hint="Email del operario"/>
+            android:hint="Email del operario" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/editText2"
+            android:id="@+id/editTextCont"
             android:textAlignment="viewStart"
             android:hint="Contraseña" />
 
@@ -58,6 +58,9 @@
             android:text="Iniciar Sesión"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button" />
+            android:id="@+id/button"
+            android:elevation="0dp"
+            android:onClick="doLoginButtonClick"/>
+
     </LinearLayout>
 </RelativeLayout>

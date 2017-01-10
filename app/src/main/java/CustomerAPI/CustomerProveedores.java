@@ -2,15 +2,12 @@ package CustomerAPI;
 
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -19,12 +16,10 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import DTOs.ProveedorDTO;
-
 
 
 /**
@@ -38,14 +33,15 @@ public class CustomerProveedores extends CustomerAPI {
     private String token;
     private Context mContext;
 
+    private List<ProveedorDTO> listadoProveedores;
+
     //METODOS
     public CustomerProveedores(String token, Context context) {
         this.token = token;
         this.mContext = context;
     }
 
-    public List<ProveedorDTO> obtenerProveedores () {
-        List<ProveedorDTO> listaObtenidaProveedores = new ArrayList<ProveedorDTO>();
+    public void obtenerProveedores () {
         //Genero la Petición
         JsonArrayRequest jsArrayRequest = new JsonArrayRequest(
                 Request.Method.POST, // init método
@@ -57,11 +53,10 @@ public class CustomerProveedores extends CustomerAPI {
                         JsonParser parser = new JsonParser();
                         JsonElement mJson =  parser.parse(response.toString());
                         Gson gson = new Gson();
-
                         Type collectionType = new TypeToken<List<ProveedorDTO>>() {}.getType();
-
                         List<ProveedorDTO> listaObtenidaProveedores = gson.fromJson(mJson, collectionType);
 
+                        cargarProveedoresAlListado(listaObtenidaProveedores);
                     }
                 },
                 new Response.ErrorListener() { //Tratamiento del error
@@ -83,9 +78,17 @@ public class CustomerProveedores extends CustomerAPI {
 
         //Agrego la Petición a la cola de peticiones
         CustomerSingleton.getInstance(this.mContext).addToRequestQueue(jsArrayRequest);
+    }
 
-        //Retorno la lista
-        return listaObtenidaProveedores;
+    private void cargarProveedoresAlListado (List<ProveedorDTO> listaObtenidaProveedores){
+        //Si esta cargada, la limpio y dejo vacia
+        if (!this.listadoProveedores.isEmpty()) {
+            this.listadoProveedores.clear();
+        }
+        //Cargo los proveedores a la variable de instancia
+        for (ProveedorDTO prov : listaObtenidaProveedores) {
+            this.listadoProveedores.add(prov);
+        }
     }
 
 
