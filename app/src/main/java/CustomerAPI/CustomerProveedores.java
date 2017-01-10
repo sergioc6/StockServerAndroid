@@ -5,6 +5,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -33,8 +34,6 @@ public class CustomerProveedores extends CustomerAPI {
     private String token;
     private Context mContext;
 
-    private List<ProveedorDTO> listadoProveedores;
-
     //METODOS
     public CustomerProveedores(String token, Context context) {
         this.token = token;
@@ -53,16 +52,17 @@ public class CustomerProveedores extends CustomerAPI {
                         JsonParser parser = new JsonParser();
                         JsonElement mJson =  parser.parse(response.toString());
                         Gson gson = new Gson();
+
                         Type collectionType = new TypeToken<List<ProveedorDTO>>() {}.getType();
+
                         List<ProveedorDTO> listaObtenidaProveedores = gson.fromJson(mJson, collectionType);
 
-                        cargarProveedoresAlListado(listaObtenidaProveedores);
                     }
                 },
                 new Response.ErrorListener() { //Tratamiento del error
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(mContext, "Error Sending the request", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, "Error enviando la solicitud al Servidor!", Toast.LENGTH_LONG).show();
                     }
                 }
         ) {//Seteo los headers
@@ -77,19 +77,11 @@ public class CustomerProveedores extends CustomerAPI {
         };
 
         //Agrego la Petición a la cola de peticiones
-        CustomerSingleton.getInstance(this.mContext).addToRequestQueue(jsArrayRequest);
+        RequestQueue queue = CustomerSingleton.getInstance(this.mContext).getRequestQueue();
+        queue.add(jsArrayRequest);
     }
 
-    private void cargarProveedoresAlListado (List<ProveedorDTO> listaObtenidaProveedores){
-        //Si esta cargada, la limpio y dejo vacia
-        if (!this.listadoProveedores.isEmpty()) {
-            this.listadoProveedores.clear();
-        }
-        //Cargo los proveedores a la variable de instancia
-        for (ProveedorDTO prov : listaObtenidaProveedores) {
-            this.listadoProveedores.add(prov);
-        }
-    }
+
 
 
 

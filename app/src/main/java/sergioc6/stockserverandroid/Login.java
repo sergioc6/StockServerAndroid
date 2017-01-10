@@ -2,6 +2,7 @@ package sergioc6.stockserverandroid;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 
 import org.json.JSONException;
 
+import java.security.*;
 import java.util.List;
 
 import CustomerAPI.CustomerLogin;
@@ -34,7 +36,7 @@ public class Login extends AppCompatActivity {
 
         if (this.isValidEmail(mEditTextEmail.getText())) {
             if(mEditTextCont.getText().length() > 0) {
-                CustomerLogin customerLogin = new CustomerLogin();
+                CustomerLogin customerLogin = new CustomerLogin(getApplicationContext());
                 customerLogin.doLogin(mEditTextEmail.getText().toString(), mEditTextCont.getText().toString());
 
             }else {

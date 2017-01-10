@@ -14,6 +14,13 @@
         android:textColor="@android:color/background_dark" />
 
     <Button
+        android:text="Obtener listado de proveedores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button7"
+        android:onClick="obtenerListadoProvClick (Principal)" />
+
+    <Button
         android:text="Confirmar Recepción Compra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

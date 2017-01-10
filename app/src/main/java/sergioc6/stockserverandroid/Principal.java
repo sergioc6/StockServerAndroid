@@ -2,6 +2,11 @@ package sergioc6.stockserverandroid;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+
+import org.json.JSONException;
+
+import CustomerAPI.CustomerProveedores;
 
 /**
  * Created by SergioC on 09/01/2017.
@@ -10,7 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 public class Principal extends AppCompatActivity {
 
     //ATRIBUTOS
-    private String token;
+    private static String token;
 
     //METODOS
     @Override
@@ -20,4 +25,15 @@ public class Principal extends AppCompatActivity {
     }
 
 
-}
+    public void obtenerListadoProvClick (View v) throws JSONException {
+        CustomerProveedores customerProveedores = new CustomerProveedores(token, getApplicationContext());
+        customerProveedores.obtenerProveedores();
+    }
+
+
+
+
+
+
+
+    }

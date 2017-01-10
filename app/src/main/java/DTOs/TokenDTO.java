@@ -1,5 +1,7 @@
 package DTOs;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by SergioC on 09/01/2017.
  */
@@ -7,6 +9,7 @@ package DTOs;
 public class TokenDTO {
 
     //ATRIBUTOS
+    @SerializedName("token")
     public String token;
 
     //METODOS
