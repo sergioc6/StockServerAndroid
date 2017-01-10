@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Registrar nuevo insumo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewRegistrarInsumo"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textColor="@android:color/background_dark"
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="10dp"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#000000">
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Nombre del insumo"
+        android:ems="10"
+        android:id="@+id/editNombreInsumo"
+        android:layout_marginTop="3dip"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editDescripcionInsumo"
+        android:text="Descripción del insumo"
+        android:layout_marginTop="3dip"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:text="Stock mínimo"
+        android:id="@+id/editStockMinimo"
+        android:layout_marginTop="10dip"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:text="Stock máximo"
+        android:id="@+id/editStockMaximo"
+        android:layout_marginTop="10dip"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerTipoInsumo"
+        android:layout_marginTop="20dip"
+        android:prompt="@strings/tipo_insumo"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerSectorInsumo"
+        android:layout_marginTop="20dip"
+        android:prompt="@strings/sector_insumo"/>
+
+    <Button
+        android:text="Registrar insumo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonRegistrarInsumo"
+        android:layout_marginTop="20dip"/>
+
+
+</LinearLayout>
