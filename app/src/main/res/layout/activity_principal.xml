@@ -18,13 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button7"
-        android:onClick="obtenerListadoProvClick (Principal)" />
+        android:onClick="obtenerListadoProvClick" />
 
     <Button
         android:text="Confirmar Recepción Compra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button2" />
+        android:id="@+id/button2"
+        android:onClick="confirmarCompraClick" />
 
     <Button
         android:text="registrar nuevo insumo"

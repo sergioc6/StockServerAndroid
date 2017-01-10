@@ -1,5 +1,6 @@
 package sergioc6.stockserverandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,7 +16,7 @@ import CustomerAPI.CustomerProveedores;
 public class Principal extends AppCompatActivity {
 
     //ATRIBUTOS
-    private static String token;
+
 
     //METODOS
     @Override
@@ -26,10 +27,16 @@ public class Principal extends AppCompatActivity {
 
 
     public void obtenerListadoProvClick (View v) throws JSONException {
-        CustomerProveedores customerProveedores = new CustomerProveedores(token, getApplicationContext());
+        TokenApplication tokenApp = TokenApplication.getInstance();
+
+        CustomerProveedores customerProveedores = new CustomerProveedores(tokenApp.getTokenGlobal(), getApplicationContext());
         customerProveedores.obtenerProveedores();
     }
 
+    public void confirmarCompraClick (View v) {
+        Intent intent = new Intent(this, Compras.class);
+        startActivity(intent);
+    }
 
 
 
