@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Compra marcada con éxito!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:text="Nº de Orden de Compra:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewNumOC"
+        android:textSize="18sp"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="Fecha:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewFecha"
+        android:textSize="18sp"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="Proveedor: "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewProveedor"
+        android:textSize="18sp"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="Monto: "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewMonto"
+        android:textSize="18sp"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="@string/estado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewEstado"
+        android:textSize="18sp"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="Confirmar otra recepción"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button6"
+        android:onClick="confirmarOtraRecepcionClick" />
+
+    <Button
+        android:text="Volver al menú principal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button12"
+        android:onClick="volverClick" />
+
+</LinearLayout>

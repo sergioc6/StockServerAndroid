@@ -2,4 +2,5 @@
     <string name="app_name">StockServerAndroid</string>
     <string name="tipo_insumo">Seleccione tipo de insumo</string>
     <string name="sector_insumo">Seleccione sector</string>
+    <string name="estado">Estado:</string>
 </resources>

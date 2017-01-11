@@ -1,7 +1,9 @@
 package sergioc6.stockserverandroid;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -33,11 +35,24 @@ public class Compras extends AppCompatActivity {
     public void confirmarCompraClick (View v) throws JSONException {
         EditText mEditTextNumOC  = (EditText)findViewById(R.id.editTextNumeroOC);
 
-        //obtengo el Token Global
-        TokenApplication tokenApp = TokenApplication.getInstance();
+        if (mEditTextNumOC.getText().length() > 0) {
+            //obtengo el Token Global
+            TokenApplication tokenApp = TokenApplication.getInstance();
 
-        CustomerCompras customerCompras = new CustomerCompras(tokenApp.getTokenGlobal(), getApplicationContext());
-        customerCompras.confirmarRecepcionCompra(mEditTextNumOC.getText().toString());
+            CustomerCompras customerCompras = new CustomerCompras(tokenApp.getTokenGlobal(), getApplicationContext());
+            customerCompras.confirmarRecepcionCompra(mEditTextNumOC.getText().toString());
+        } else {
+            AlertDialog alertDialog = new AlertDialog.Builder(Compras.this).create();
+            alertDialog.setTitle("Nª de Orden de Compra requerido!");
+            alertDialog.setMessage("Por favor ingrese el Nº de la OC.");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
     }
 
 

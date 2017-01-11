@@ -1,5 +1,8 @@
 package DTOs;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by SergioC on 11/01/2017.
  */
@@ -129,4 +132,5 @@ public class CompraDTO {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

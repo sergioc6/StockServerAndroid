@@ -1,6 +1,9 @@
 package CustomerAPI;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,6 +27,8 @@ import java.util.List;
 
 import DTOs.CompraDTO;
 import DTOs.InsumoDTO;
+import sergioc6.stockserverandroid.ConfirmarCompraSuccess;
+import sergioc6.stockserverandroid.Login;
 
 /**
  * Created by SergioC on 11/01/2017.
@@ -59,9 +64,9 @@ public class CustomerCompras extends CustomerAPI{
                         Gson gson = new Gson();
 
                         Type collectionType = new TypeToken<CompraDTO>() {}.getType();
-
                         CompraDTO compraModificada = gson.fromJson(mJson, collectionType);
 
+                        mostrarCompraModificada(compraModificada);
                     }
                 },
                 new Response.ErrorListener() { //Tratamiento del error
@@ -86,7 +91,17 @@ public class CustomerCompras extends CustomerAPI{
         queue.add(jsObjRequest);
     }
 
-
+    public void mostrarCompraModificada (CompraDTO compra) {
+        Intent intent = new Intent(mContext, ConfirmarCompraSuccess.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("id_compra", compra.getId_compra());
+        intent.putExtra("numero_oc", compra.getNumero_oc());
+        intent.putExtra("nombre_proveedor", compra.getNombre_proveedor());
+        intent.putExtra("monto", compra.getMonto());
+        intent.putExtra("fecha", compra.getFecha());
+        intent.putExtra("estado", compra.getEstado());
+        mContext.startActivity(intent);
+    }
 
 
 }
