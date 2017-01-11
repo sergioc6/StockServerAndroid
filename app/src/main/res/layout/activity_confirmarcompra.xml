@@ -24,13 +24,14 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText" />
+        android:id="@+id/editTextNumeroOC" />
 
     <Button
         android:text="Confirmar OC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button9" />
+        android:id="@+id/button9"
+        android:onClick="confirmarCompraClick" />
 
     <Button
         android:text="Volver"

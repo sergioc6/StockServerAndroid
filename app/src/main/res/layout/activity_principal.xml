@@ -46,8 +46,9 @@
         android:id="@+id/button3" />
 
     <Button
-        android:text="Salir"
+        android:text="Cerrar Sesión"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button6" />
+        android:id="@+id/buttonCerrarSesion"
+        android:onClick="cerrarSesionClick" />
 </LinearLayout>

@@ -75,7 +75,10 @@ public class Login extends AppCompatActivity {
     }
 
 
-
+    public void salirButtonClick (View v) {
+        finish();
+        System.exit(0);
+    }
 
 
 

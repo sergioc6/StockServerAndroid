@@ -39,7 +39,15 @@ public class Principal extends AppCompatActivity {
     }
 
 
+    public void cerrarSesionClick (View v) {
+        TokenApplication tokenApp = TokenApplication.getInstance();
+        tokenApp.deleteTokenGlobal();
 
+        Intent i = getBaseContext().getPackageManager()
+                .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 
 
 
