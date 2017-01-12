@@ -62,15 +62,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerTipoInsumo"
-        android:layout_marginTop="20dip"
-        />
+        android:layout_marginTop="20dip" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerSectorInsumo"
-        android:layout_marginTop="20dip"
-        />
+        android:layout_marginTop="20dip" />
 
     <Button
         android:text="Registrar insumo"

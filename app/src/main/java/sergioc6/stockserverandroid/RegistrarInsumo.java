@@ -45,7 +45,7 @@ public class RegistrarInsumo extends AppCompatActivity {
         ArrayAdapter<String> adapterTipos = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listaTiposStrings);
         adapterSectores.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinnerTipos = (Spinner) findViewById(R.id.spinnerTipoInsumo);
-        spinnerTipos.setAdapter(adapterSectores);
+        spinnerTipos.setAdapter(adapterTipos);
 
 
 
