@@ -21,6 +21,7 @@
         <activity android:label="@string/app_name" android:name=".RegistrarInsumo"/>
         <activity android:label="@string/app_name" android:name=".ConfirmarCompraSuccess"/>
         <activity android:label="@string/app_name" android:name=".Proveedores"/>
+        <activity android:label="@string/app_name" android:name=".ConsultarStock"/>
 
 
     </application>

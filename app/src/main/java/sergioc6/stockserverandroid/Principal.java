@@ -45,7 +45,11 @@ public class Principal extends AppCompatActivity {
 
         CustomerInsumos customerInsumos = new CustomerInsumos(tokenApp.getTokenGlobal(), getApplicationContext());
         customerInsumos.obtenerSectoresInsumosYTiposInsumos();
+    }
 
+    public void consultarStockClick (View v) {
+        Intent intent = new Intent(this, ConsultarStock.class);
+        startActivity(intent);
     }
 
 
