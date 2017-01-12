@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -54,9 +55,9 @@ public class CustomerProveedores extends CustomerAPI {
                         JsonElement mJson =  parser.parse(response.toString());
                         Gson gson = new Gson();
 
-                        Type collectionType = new TypeToken<List<ProveedorDTO>>() {}.getType();
+                        Type collectionType = new TypeToken<ArrayList<ProveedorDTO>>() {}.getType();
 
-                        List<ProveedorDTO> listaObtenidaProveedores = gson.fromJson(mJson, collectionType);
+                        ArrayList<ProveedorDTO> listaObtenidaProveedores = gson.fromJson(mJson, collectionType);
                         cargarProveedores(listaObtenidaProveedores);
                     }
                 },
@@ -83,8 +84,9 @@ public class CustomerProveedores extends CustomerAPI {
     }
 
 
-    public void cargarProveedores(List<ProveedorDTO> listaProveedores) {
+    public void cargarProveedores(ArrayList<ProveedorDTO> listaProveedores) {
         Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.Proveedores.class);
+        myIntent.putExtra("ListProv", listaProveedores);
         myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(myIntent);
     }

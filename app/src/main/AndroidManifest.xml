@@ -18,8 +18,9 @@
 
         <activity android:label="@string/app_name" android:name=".Principal"/>
         <activity android:label="@string/app_name" android:name=".Compras"/>
-        <activity android:label="@string/app_name" android:name=".Insumos"/>
+        <activity android:label="@string/app_name" android:name=".RegistrarInsumo"/>
         <activity android:label="@string/app_name" android:name=".ConfirmarCompraSuccess"/>
+        <activity android:label="@string/app_name" android:name=".Proveedores"/>
 
 
     </application>

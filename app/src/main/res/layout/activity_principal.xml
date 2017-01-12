@@ -31,7 +31,8 @@
         android:text="registrar nuevo insumo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button5" />
+        android:id="@+id/button5"
+        android:onClick="registrarInsumoNuevoClick" />
 
     <Button
         android:text="Consultar stock de insumo"

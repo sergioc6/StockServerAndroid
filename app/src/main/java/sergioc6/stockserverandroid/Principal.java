@@ -7,6 +7,7 @@ import android.view.View;
 
 import org.json.JSONException;
 
+import CustomerAPI.CustomerInsumos;
 import CustomerAPI.CustomerProveedores;
 
 /**
@@ -36,6 +37,15 @@ public class Principal extends AppCompatActivity {
     public void confirmarCompraClick (View v) {
         Intent intent = new Intent(this, Compras.class);
         startActivity(intent);
+    }
+
+
+    public void registrarInsumoNuevoClick (View v) {
+        TokenApplication tokenApp = TokenApplication.getInstance();
+
+        CustomerInsumos customerInsumos = new CustomerInsumos(tokenApp.getTokenGlobal(), getApplicationContext());
+        customerInsumos.obtenerSectoresInsumosYTiposInsumos();
+
     }
 
 

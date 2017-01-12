@@ -1,10 +1,12 @@
 package DTOs;
 
+import java.io.Serializable;
+
 /**
  * Created by SergioC on 14/12/2016.
  */
 
-public class ProveedorDTO {
+public class ProveedorDTO implements Serializable {
 
     public int id_proveedor;
     public String nombre_proveedor;
@@ -20,6 +22,16 @@ public class ProveedorDTO {
         this.localidad = localidad;
         this.direccion = direccion;
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return  "ID_proveedor: " + id_proveedor +".\n"+
+                "Nombre del Proveedor: " + nombre_proveedor + ".\n" +
+                "Telefono: " + telefono + ".\n" +
+                "Localidad: " + localidad + ".\n" +
+                "Direccion: " + direccion + ".\n" +
+                "Email: " + email + ".\n";
     }
 
     public int getId_proveedor() {

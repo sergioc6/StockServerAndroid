@@ -7,7 +7,7 @@ package CustomerAPI;
 public class CustomerAPI {
 
     //ATRIBUTOS
-    public static String URL_BASE = "http://192.168.1.7/StockServer/API/";
+    public static String URL_BASE = "http://192.168.1.8/StockServer/API/";
 
 
 }
