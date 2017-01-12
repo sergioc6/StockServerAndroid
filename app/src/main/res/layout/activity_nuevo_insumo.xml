@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Nombre del insumo"
+        android:hint="Nombre del insumo"
         android:ems="10"
         android:id="@+id/editNombreInsumo"
         android:layout_marginTop="3dip"/>
@@ -37,7 +37,7 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/editDescripcionInsumo"
-        android:text="Descripción del insumo"
+        android:hint="Descripción del insumo"
         android:layout_marginTop="3dip"/>
 
     <EditText
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:text="Stock mínimo"
+        android:hint="Stock mínimo"
         android:id="@+id/editStockMinimo"
         android:layout_marginTop="10dip"/>
 
@@ -54,28 +54,63 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:text="Stock máximo"
+        android:hint="Stock máximo"
         android:id="@+id/editStockMaximo"
         android:layout_marginTop="10dip"/>
 
+    <TextView
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/background_dark"
+        android:text="@string/tipo_insumo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        android:layout_marginLeft="10dp"/>
+
     <Spinner
+        android:spinnerMode="dropdown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerTipoInsumo"
-        android:layout_marginTop="20dip" />
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/tipo_insumo"
+        android:textSize="16sp"
+        android:textColor="@android:color/background_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:layout_marginLeft="10dp"/>
 
     <Spinner
+        android:spinnerMode="dropdown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerSectorInsumo"
-        android:layout_marginTop="20dip" />
+        android:layout_marginTop="10dip"
+        />
 
     <Button
         android:text="Registrar insumo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonRegistrarInsumo"
-        android:layout_marginTop="20dip"/>
+        android:layout_marginTop="20dip"
+        android:onClick="registrarInsumoClick"/>
+
+    <Button
+        android:text="Volver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonVolver"
+        android:onClick="volverClick"/>
 
 
 </LinearLayout>

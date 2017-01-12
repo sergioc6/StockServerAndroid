@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+
+import org.json.JSONException;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import CustomerAPI.CustomerInsumos;
 import DTOs.ProveedorDTO;
 import DTOs.SectorDTO;
 import DTOs.TipoInsumoDTO;
@@ -48,6 +52,32 @@ public class RegistrarInsumo extends AppCompatActivity {
         spinnerTipos.setAdapter(adapterTipos);
 
 
+
+    }
+
+    public void registrarInsumoClick(View v) throws JSONException {
+        EditText nombreInsumo = (EditText) findViewById(R.id.editNombreInsumo);
+        String pNombreInsumo = nombreInsumo.getText().toString();
+
+        EditText descripcionInsumo = (EditText) findViewById(R.id.editDescripcionInsumo);
+        String pDescripcionInsumo = descripcionInsumo.getText().toString();
+
+        EditText stockMin = (EditText) findViewById(R.id.editStockMinimo);
+        int pStockMin = Integer.parseInt(stockMin.getText().toString());
+
+        EditText stockMax = (EditText) findViewById(R.id.editStockMaximo);
+        int pStockMax = Integer.parseInt(stockMax.getText().toString());
+
+        Spinner spinnerTipoInsumo = (Spinner) findViewById(R.id.spinnerTipoInsumo);
+        String pTipoInsumo = spinnerTipoInsumo.getSelectedItem().toString();
+
+        Spinner spinnerSectorInsumo = (Spinner) findViewById(R.id.spinnerSectorInsumo);
+        String pSectorInsumo = spinnerSectorInsumo.getSelectedItem().toString();
+
+        TokenApplication tokenApplication = TokenApplication.getInstance();
+
+        CustomerInsumos customerInsumos = new CustomerInsumos(tokenApplication.getTokenGlobal(), getApplicationContext());
+        customerInsumos.insertarInsumo(pNombreInsumo, pDescripcionInsumo, pStockMin, pStockMax, pSectorInsumo, pTipoInsumo);
 
     }
 

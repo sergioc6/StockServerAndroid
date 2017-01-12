@@ -54,6 +54,54 @@ public class CustomerInsumos extends CustomerAPI {
         this.mContext = context;
     }
 
+    public void insertarInsumo(String nombre_insumo, String descripcion, int stock_min, int stock_max, String sector, String tipo_insumo) throws JSONException
+    {
+        //Armo el Json
+        JSONObject json = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        json.put("nombre_insumo",nombre_insumo);
+        json.put("descripcion", descripcion);
+        json.put("stock_min", stock_min);
+        json.put("stock_max", stock_max);
+        json.put("sector", sector);
+        json.put("tipo_insumo", tipo_insumo);
+
+        jsonArray.put(json);
+
+        //Genero la Petición
+        JsonObjectRequest jsArrayRequest = new JsonObjectRequest(
+                Request.Method.POST, // init método
+                this.URL_BASE + insertar_insumo, // URL API
+                json, // Parámetos a enviar en el POST
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(mContext, "¡Insumo insertado con éxito", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() { //Tratamiento del error
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(mContext, "¡Error al insertar el nuevo insumo!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {//Seteo los headers
+            @Override
+            public HashMap<String, String> getHeaders() {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json;charset=UTF-8");
+                params.put("Accept", "application/json");
+                params.put("token", token);
+                return params;
+            }
+        };
+
+        //Agrego la Petición a la cola de peticiones
+        RequestQueue queue = CustomerSingleton.getInstance(this.mContext).getRequestQueue();
+        queue.add(jsArrayRequest);
+    }
+
     public void obtenerSectoresInsumosYTiposInsumos () {
         //Genero la Petición
         JsonArrayRequest jsArrayRequest = new JsonArrayRequest(
