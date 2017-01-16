@@ -70,4 +70,5 @@
             android:onClick="salirButtonClick" />
 
     </LinearLayout>
+
 </RelativeLayout>
