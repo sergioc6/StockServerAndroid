@@ -1,10 +1,12 @@
 package DTOs;
 
+import java.io.Serializable;
+
 /**
  * Created by SergioC on 21/12/2016.
  */
 
-public class InsumoDTO {
+public class InsumoDTO implements Serializable {
 
     private String id_insumo;
     private String nombre_insumo;

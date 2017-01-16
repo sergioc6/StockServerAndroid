@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import DTOs.InsumoDTO;
+import DTOs.ProveedorDTO;
 import DTOs.SectorDTO;
 import DTOs.TipoInsumoDTO;
 import DTOs.TokenDTO;
@@ -44,7 +45,7 @@ public class CustomerInsumos extends CustomerAPI {
     private static String insertar_insumo = "API_Insumos/insertarInsumo";
     private static String obtener_sectores = "API_Insumos/obtenerSectores";
     private static String obtener_tipos_insumos = "API_Insumos/obtenerTiposInsumos";
-    private static String consultar_stock = "API_Insumos/obtenerContidadDeInsumo";
+    private static String consultar_stock = "API_Insumos/obtenerCantidadDeInsumo";
     private String token;
     private Context mContext;
 
@@ -212,9 +213,10 @@ public class CustomerInsumos extends CustomerAPI {
                         JsonElement mJson = mParser.parse(response.toString());
                         Gson gson = new Gson();
 
-                        Type collectionType = new TypeToken<InsumoDTO>() {
-                        }.getType();
+                        Type collectionType = new TypeToken<InsumoDTO>() {}.getType();
 
+                        InsumoDTO insumoObtenido = gson.fromJson(mJson, collectionType);
+                        mostrarCantidadInsumoObtenido (insumoObtenido);
                     }
                 },
                 new Response.ErrorListener() { //Tratamiento del error
@@ -240,5 +242,12 @@ public class CustomerInsumos extends CustomerAPI {
         queue.add(jsObjRequest);
     }
 
+
+    public void mostrarCantidadInsumoObtenido(InsumoDTO insumo) {
+        Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.ConsultarStockSuccess.class);
+        myIntent.putExtra("Insumo", insumo);
+        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(myIntent);
+    }
 
 }
