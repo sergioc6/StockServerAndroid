@@ -46,6 +46,7 @@ public class CustomerInsumos extends CustomerAPI {
     private static String obtener_sectores = "API_Insumos/obtenerSectores";
     private static String obtener_tipos_insumos = "API_Insumos/obtenerTiposInsumos";
     private static String consultar_stock = "API_Insumos/obtenerCantidadDeInsumo";
+    private static String buscar_insumo = "API_Insumos/buscarInsumo/";
     private String token;
     private Context mContext;
 
@@ -242,9 +243,62 @@ public class CustomerInsumos extends CustomerAPI {
         queue.add(jsObjRequest);
     }
 
+    public void buscarInsumo(String codigoInsumo) throws JSONException {
+        //Armo el Json
+        JSONObject json = new JSONObject();
+        json.put("cod_insumo", codigoInsumo);
+
+        //Genero la Petición
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(
+                Request.Method.POST, // init método
+                this.URL_BASE + buscar_insumo + codigoInsumo, // URL API
+                json, // Parámetos a enviar en el POST
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        JsonParser mParser = new JsonParser();
+                        JsonElement mJson = mParser.parse(response.toString());
+                        Gson gson = new Gson();
+
+                        Type collectionType = new TypeToken<InsumoDTO>() {}.getType();
+
+                        InsumoDTO insumoObtenido = gson.fromJson(mJson, collectionType);
+                        mostrarDatosInsumoEncontrado(insumoObtenido);
+                    }
+                },
+                new Response.ErrorListener() { //Tratamiento del error
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
+                        Toast.makeText(mContext, "Error enviando la solicitud al Servidor!", Toast.LENGTH_LONG).show();
+                    }
+                }
+        ) {//Seteo los headers
+            @Override
+            public HashMap<String, String> getHeaders() {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json;charset=UTF-8");
+                params.put("Accept", "application/json");
+                params.put("token", token);
+                return params;
+            }
+        };
+
+        //Agrego la Petición a la cola de peticiones
+        RequestQueue queue = CustomerSingleton.getInstance(mContext).getRequestQueue();
+        queue.add(jsObjRequest);
+    }
 
     public void mostrarCantidadInsumoObtenido(InsumoDTO insumo) {
         Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.ConsultarStockSuccess.class);
+        myIntent.putExtra("Insumo", insumo);
+        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(myIntent);
+    }
+
+    public void mostrarDatosInsumoEncontrado(InsumoDTO insumo)
+    {
+        Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.BuscarInsumoSuccess.class);
         myIntent.putExtra("Insumo", insumo);
         myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(myIntent);

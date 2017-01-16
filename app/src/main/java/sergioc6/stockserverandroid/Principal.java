@@ -52,6 +52,12 @@ public class Principal extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void buscarInsumoClick(View v)
+    {
+        Intent intent = new Intent(this, BuscarInsumo.class);
+        startActivity(intent);
+    }
+
 
     public void cerrarSesionClick (View v) {
         TokenApplication tokenApp = TokenApplication.getInstance();
