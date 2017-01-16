@@ -44,7 +44,7 @@ public class CustomerInsumos extends CustomerAPI {
     private static String insertar_insumo = "API_Insumos/insertarInsumo";
     private static String obtener_sectores = "API_Insumos/obtenerSectores";
     private static String obtener_tipos_insumos = "API_Insumos/obtenerTiposInsumos";
-    private static String consultar_stock = "API_Insumos/consultarStock";
+    private static String consultar_stock = "API_Insumos/obtenerContidadDeInsumo";
     private String token;
     private Context mContext;
 
@@ -54,13 +54,12 @@ public class CustomerInsumos extends CustomerAPI {
         this.mContext = context;
     }
 
-    public void insertarInsumo(String nombre_insumo, String descripcion, int stock_min, int stock_max, String sector, String tipo_insumo) throws JSONException
-    {
+    public void insertarInsumo(String nombre_insumo, String descripcion, int stock_min, int stock_max, String sector, String tipo_insumo) throws JSONException {
         //Armo el Json
         JSONObject json = new JSONObject();
         JSONArray jsonArray = new JSONArray();
 
-        json.put("nombre_insumo",nombre_insumo);
+        json.put("nombre_insumo", nombre_insumo);
         json.put("descripcion", descripcion);
         json.put("stock_min", stock_min);
         json.put("stock_max", stock_max);
@@ -102,7 +101,7 @@ public class CustomerInsumos extends CustomerAPI {
         queue.add(jsArrayRequest);
     }
 
-    public void obtenerSectoresInsumosYTiposInsumos () {
+    public void obtenerSectoresInsumosYTiposInsumos() {
         //Genero la Petición
         JsonArrayRequest jsArrayRequest = new JsonArrayRequest(
                 Request.Method.POST, // init método
@@ -112,10 +111,11 @@ public class CustomerInsumos extends CustomerAPI {
                     @Override
                     public void onResponse(JSONArray response) {
                         JsonParser parser = new JsonParser();
-                        JsonElement mJson =  parser.parse(response.toString());
+                        JsonElement mJson = parser.parse(response.toString());
                         Gson gson = new Gson();
 
-                        Type collectionType = new TypeToken<ArrayList<SectorDTO>>() {}.getType();
+                        Type collectionType = new TypeToken<ArrayList<SectorDTO>>() {
+                        }.getType();
 
                         ArrayList<SectorDTO> listaObtenidaSectores = gson.fromJson(mJson, collectionType);
                         obtenerTiposDeInsumos(listaObtenidaSectores);
@@ -144,7 +144,7 @@ public class CustomerInsumos extends CustomerAPI {
     }
 
 
-    public void obtenerTiposDeInsumos (final ArrayList<SectorDTO> listaObtenidaSectores) {
+    public void obtenerTiposDeInsumos(final ArrayList<SectorDTO> listaObtenidaSectores) {
         //Genero la Petición
         JsonArrayRequest jsArrayRequest = new JsonArrayRequest(
                 Request.Method.POST, // init método
@@ -154,10 +154,11 @@ public class CustomerInsumos extends CustomerAPI {
                     @Override
                     public void onResponse(JSONArray response) {
                         JsonParser parser = new JsonParser();
-                        JsonElement mJson =  parser.parse(response.toString());
+                        JsonElement mJson = parser.parse(response.toString());
                         Gson gson = new Gson();
 
-                        Type collectionType = new TypeToken<ArrayList<TipoInsumoDTO>>() {}.getType();
+                        Type collectionType = new TypeToken<ArrayList<TipoInsumoDTO>>() {
+                        }.getType();
 
                         ArrayList<TipoInsumoDTO> listaObtenidaTipos = gson.fromJson(mJson, collectionType);
                         cargarVistaRegistrarInsumo(listaObtenidaSectores, listaObtenidaTipos);
@@ -185,8 +186,7 @@ public class CustomerInsumos extends CustomerAPI {
         queue.add(jsArrayRequest);
     }
 
-    public void cargarVistaRegistrarInsumo(ArrayList<SectorDTO> listaObtenidaSectores, ArrayList<TipoInsumoDTO> listaObtenidaTipos)
-    {
+    public void cargarVistaRegistrarInsumo(ArrayList<SectorDTO> listaObtenidaSectores, ArrayList<TipoInsumoDTO> listaObtenidaTipos) {
         Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.RegistrarInsumo.class);
         myIntent.putExtra("ListSectores", listaObtenidaSectores);
         myIntent.putExtra("ListTiposInsumos", listaObtenidaTipos);
@@ -198,7 +198,7 @@ public class CustomerInsumos extends CustomerAPI {
     public void consultarStockDeInsumo(String codigoInsumo) throws JSONException {
         //Armo el Json
         JSONObject json = new JSONObject();
-        json.put("cod_insumo",codigoInsumo);
+        json.put("cod_insumo", codigoInsumo);
 
         //Genero la Petición
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(
@@ -209,11 +209,11 @@ public class CustomerInsumos extends CustomerAPI {
                     @Override
                     public void onResponse(JSONObject response) {
                         JsonParser mParser = new JsonParser();
-                        JsonElement mJson =  mParser.parse(response.toString());
+                        JsonElement mJson = mParser.parse(response.toString());
                         Gson gson = new Gson();
 
-                        Type collectionType = new TypeToken<InsumoDTO>() {}.getType();
-                        InsumoDTO insumoObtenido = gson.fromJson(mJson, collectionType);
+                        Type collectionType = new TypeToken<InsumoDTO>() {
+                        }.getType();
 
                     }
                 },
@@ -221,14 +221,19 @@ public class CustomerInsumos extends CustomerAPI {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
-
-                        CharSequence text = "No existe insumo para el código ingresado!";
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(mContext, text, duration);
-                        toast.show();
+                        Toast.makeText(mContext, "Error enviando la solicitud al Servidor!", Toast.LENGTH_LONG).show();
                     }
                 }
-        );
+        ) {//Seteo los headers
+            @Override
+            public HashMap<String, String> getHeaders() {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json;charset=UTF-8");
+                params.put("Accept", "application/json");
+                params.put("token", token);
+                return params;
+            }
+        };
 
         //Agrego la Petición a la cola de peticiones
         RequestQueue queue = CustomerSingleton.getInstance(mContext).getRequestQueue();

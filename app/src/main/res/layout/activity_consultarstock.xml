@@ -25,7 +25,8 @@
         android:text="Consultar Stock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button13" />
+        android:id="@+id/button13"
+        android:onClick="consultarStockManualClick" />
 
     <Button
         android:text="Leer código QR de Insumo"

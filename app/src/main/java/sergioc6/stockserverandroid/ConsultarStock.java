@@ -29,13 +29,11 @@ public class ConsultarStock extends AppCompatActivity {
     }
 
 
-    public void consultarStockClick (View v) throws JSONException {
-        TokenApplication token = new TokenApplication();
-
+    public void consultarStockManualClick (View v) throws JSONException {
+        TokenApplication token = TokenApplication.getInstance();
         EditText editTextCodIns   = (EditText)findViewById(R.id.editTextCodIns);
 
         CustomerInsumos customerInsumos = new CustomerInsumos(token.getTokenGlobal(), getApplicationContext());
-
         customerInsumos.consultarStockDeInsumo(editTextCodIns.getText().toString());
     }
 
