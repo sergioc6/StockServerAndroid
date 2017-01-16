@@ -11,7 +11,9 @@
         android:textStyle="normal|bold"
         android:textAlignment="center"
         android:textSize="24sp"
-        android:textColor="@android:color/background_dark" />
+        android:textColor="@android:color/background_dark"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:text="Nº de Orden de Compra:"
@@ -20,7 +22,10 @@
         android:id="@+id/textViewNumOC"
         android:textSize="18sp"
         android:textColor="@android:color/background_dark"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="5dp"/>
 
     <TextView
         android:text="Fecha:"
@@ -29,7 +34,10 @@
         android:id="@+id/textViewFecha"
         android:textSize="18sp"
         android:textColor="@android:color/background_dark"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="5dp"/>
 
     <TextView
         android:text="Proveedor: "
@@ -38,7 +46,10 @@
         android:id="@+id/textViewProveedor"
         android:textSize="18sp"
         android:textColor="@android:color/background_dark"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="5dp"/>
 
     <TextView
         android:text="Monto: "
@@ -47,7 +58,10 @@
         android:id="@+id/textViewMonto"
         android:textSize="18sp"
         android:textColor="@android:color/background_dark"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"/>
 
     <TextView
         android:text="@string/estado"
@@ -56,14 +70,19 @@
         android:id="@+id/textViewEstado"
         android:textSize="18sp"
         android:textColor="@android:color/background_dark"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"/>
 
     <Button
         android:text="Confirmar otra recepción"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button6"
-        android:onClick="confirmarOtraRecepcionClick" />
+        android:onClick="confirmarOtraRecepcionClick"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"/>
 
     <Button
         android:text="Volver al menú principal"

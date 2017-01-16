@@ -53,4 +53,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonCerrarSesion"
         android:onClick="cerrarSesionClick" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@mipmap/stockserver_logo"
+        android:id="@+id/imageView"
+        android:layout_weight="0.55" />
 </LinearLayout>
