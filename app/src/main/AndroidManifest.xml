@@ -23,6 +23,8 @@
         <activity android:label="@string/app_name" android:name=".Proveedores"/>
         <activity android:label="@string/app_name" android:name=".ConsultarStock"/>
         <activity android:label="@string/app_name" android:name=".ConsultarStockSuccess"/>
+        <activity android:label="@string/app_name" android:name=".BuscarInsumo"/>
+        <activity android:label="@string/app_name" android:name=".BuscarInsumoSuccess"/>
 
 
     </application>
