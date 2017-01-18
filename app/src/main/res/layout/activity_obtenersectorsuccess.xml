@@ -39,26 +39,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewSectorNombre"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@mipmap/stockserver_logo"
                 android:id="@+id/imageViewSector"
-                android:adjustViewBounds="true" />
+                android:adjustViewBounds="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"/>
 
             <TextView
                 android:text="TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewLatitud" />
+                android:id="@+id/textViewLatitud"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
             <TextView
                 android:text="TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewLongitud" />
+                android:id="@+id/textViewLongitud"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -74,32 +87,45 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewUbicacionActual"
                 android:textSize="24sp"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
             <TextView
                 android:text="Latitud actual:"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewLatitudActual" />
+                android:id="@+id/textViewLatitudActual"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
             <TextView
                 android:text="Longitud actual:"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewLongitudActual" />
+                android:id="@+id/textViewLongitudActual"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
             <TextView
                 android:text="Distancia del sector:"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewDistancia" />
+                android:id="@+id/textViewDistancia"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
             <Button
                 android:text="Actualizar Ubicación"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonActualizarUbicacion"
-                android:onClick="actualizarUbicacionClick" />
+                android:onClick="actualizarUbicacionClick"
+                android:textColor="@color/colorPrimary"/>
 
 
         </LinearLayout>
@@ -110,6 +136,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonConsultarOtroInsumo"
-        android:onClick="consultarOtroInsumoClick"/>
+        android:onClick="consultarOtroInsumoClick"
+        android:textColor="@color/colorPrimary"/>
 
 </LinearLayout>

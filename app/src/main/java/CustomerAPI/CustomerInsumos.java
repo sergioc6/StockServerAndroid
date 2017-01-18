@@ -47,7 +47,7 @@ public class CustomerInsumos extends CustomerAPI {
     private static String obtener_sector_insumo = "API_Insumos/obtenerSectorDeInsumo";
     private static String obtener_tipos_insumos = "API_Insumos/obtenerTiposInsumos";
     private static String consultar_stock = "API_Insumos/obtenerCantidadDeInsumo";
-    private static String buscar_insumo = "API_Insumos/buscarInsumo";
+    private static String buscar_insumo = "API_Insumos/buscarInsumo/";
     private String token;
     private Context mContext;
 
@@ -252,7 +252,7 @@ public class CustomerInsumos extends CustomerAPI {
         //Genero la Petición
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(
                 Request.Method.POST, // init método
-                this.URL_BASE + buscar_insumo, // URL API
+                this.URL_BASE + buscar_insumo + codigoInsumo, // URL API
                 json, // Parámetos a enviar en el POST
                 new Response.Listener<JSONObject>() {
                     @Override

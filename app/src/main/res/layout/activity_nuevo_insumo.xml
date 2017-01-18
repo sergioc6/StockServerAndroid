@@ -81,7 +81,7 @@
     <TextView
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/tipo_insumo"
+        android:text="@string/sector_insumo"
         android:textSize="16sp"
         android:textColor="@android:color/background_dark"
         android:layout_width="match_parent"

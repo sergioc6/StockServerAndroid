@@ -28,7 +28,9 @@
         android:layout_height="0dp"
         android:src="@mipmap/stockserver_logo"
         android:id="@+id/imageViewUsuario"
-        android:layout_weight="0.55" />
+        android:layout_weight="0.55"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"/>
 
     <Button
         android:text="Obtener listado de proveedores"

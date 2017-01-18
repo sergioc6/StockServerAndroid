@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
@@ -34,7 +36,10 @@ public class Principal extends AppCompatActivity {
         ImageView imageViewUsuario = (ImageView) findViewById(R.id.imageViewUsuario);
         byte[] decodedString = Base64.decode(tokenApp.getFotouser_base64(), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        imageViewUsuario.setImageBitmap(decodedByte);
+        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), decodedByte);
+        roundedBitmapDrawable.setCornerRadius(120.0f);
+        roundedBitmapDrawable.setAntiAlias(true);
+        imageViewUsuario.setImageDrawable(roundedBitmapDrawable);
     }
 
 

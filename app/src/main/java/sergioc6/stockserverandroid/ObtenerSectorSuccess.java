@@ -1,6 +1,5 @@
 package sergioc6.stockserverandroid;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,30 +9,16 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import org.json.JSONException;
-
-import java.util.List;
-
-import CustomerAPI.CustomerInsumos;
-import DTOs.InsumoDTO;
 import DTOs.SectorDTO;
-
-import static java.sql.Types.NULL;
 
 /**
  * Created by SergioC on 17/01/2017.
@@ -66,7 +51,10 @@ public class ObtenerSectorSuccess extends AppCompatActivity {
         ImageView imageViewSector = (ImageView) findViewById(R.id.imageViewSector);
         byte[] decodedString = Base64.decode(sector.getFoto_base64(), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        imageViewSector.setImageBitmap(decodedByte);
+        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), decodedByte);
+        roundedBitmapDrawable.setCornerRadius(50.0f);
+        roundedBitmapDrawable.setAntiAlias(true);
+        imageViewSector.setImageDrawable(roundedBitmapDrawable);
     }
 
 
