@@ -66,6 +66,9 @@ public class ObtenerSectorSuccess extends AppCompatActivity {
             mostrarAlertActivarGPS();
         } else {
 
+
+
+
             //cargarUbicacionActual(location);
 
         }
