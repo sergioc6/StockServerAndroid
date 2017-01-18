@@ -104,14 +104,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonRegistrarInsumo"
         android:layout_marginTop="10dip"
-        android:onClick="registrarInsumoClick"/>
+        android:onClick="registrarInsumoClick"
+        android:textColor="@color/colorPrimary"/>
 
     <Button
         android:text="Volver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonVolver"
-        android:onClick="volverClick"/>
+        android:onClick="volverClick"
+        android:textColor="@color/colorPrimary"/>
 
 
 </LinearLayout>

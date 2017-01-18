@@ -37,20 +37,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button13"
-        android:onClick="consultarStockManualClick" />
+        android:onClick="consultarStockManualClick"
+        android:textColor="@color/colorPrimary"/>
 
     <Button
         android:text="Leer código QR de Insumo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button14"
-        android:onClick="consultarScanQR"/>
+        android:onClick="consultarScanQR"
+        android:textColor="@color/colorPrimary"/>
 
     <Button
         android:text="Volver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button15"
-        android:onClick="volverClick" />
+        android:onClick="volverClick"
+        android:textColor="@color/colorPrimary"/>
 
 </LinearLayout>

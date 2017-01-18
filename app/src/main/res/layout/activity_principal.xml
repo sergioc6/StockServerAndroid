@@ -11,35 +11,49 @@
         android:textStyle="normal|bold"
         android:textAlignment="center"
         android:textSize="24sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:textColor="@android:color/background_dark" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#000000">
+    </LinearLayout>
+
 
     <Button
         android:text="Obtener listado de proveedores"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button7"
-        android:onClick="obtenerListadoProvClick" />
+        android:onClick="obtenerListadoProvClick"
+        android:textColor="@color/colorPrimary"/>
 
     <Button
         android:text="Confirmar Recepción Compra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button2"
-        android:onClick="confirmarCompraClick" />
+        android:onClick="confirmarCompraClick"
+        android:textColor="@color/colorPrimary"/>
 
     <Button
         android:text="registrar nuevo insumo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button5"
-        android:onClick="registrarInsumoNuevoClick" />
+        android:onClick="registrarInsumoNuevoClick"
+        android:textColor="@color/colorPrimary"/>
 
     <Button
         android:text="Consultar stock de insumo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button4"
-        android:onClick="consultarStockClick" />
+        android:onClick="consultarStockClick"
+        android:textColor="@color/colorPrimary"/>
 
     <Button
         android:text="Buscar insumo en deposito"
@@ -47,6 +61,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonBuscarInsumo"
         android:onClick="buscarInsumoClick"
+        android:textColor="@color/colorPrimary"
         />
 
     <Button
@@ -54,7 +69,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonCerrarSesion"
-        android:onClick="cerrarSesionClick" />
+        android:onClick="cerrarSesionClick"
+        android:textColor="@color/colorPrimary"/>
 
     <ImageView
         android:layout_width="match_parent"

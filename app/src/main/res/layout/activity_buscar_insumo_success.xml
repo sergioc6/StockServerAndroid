@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonVolver"
         android:onClick="volverClick"
+        android:textColor="@color/colorPrimary"
         />
 
 </LinearLayout>

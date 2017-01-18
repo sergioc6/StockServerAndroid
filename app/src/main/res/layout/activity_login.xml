@@ -9,7 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="sergioc6.stockserverandroid.Login">
+    tools:context="sergioc6.stockserverandroid.Login"
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:orientation="vertical"
@@ -27,7 +28,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="24sp"
             android:textStyle="normal|bold"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/colorText"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -43,7 +45,10 @@
             android:ems="10"
             android:id="@+id/editTextEmail"
             android:textAlignment="viewStart"
-            android:hint="Email del operario" />
+            android:hint="Email del operario"
+            android:backgroundTint="@color/colorEditTextBorderlineUser"
+            android:textColorHint="@color/colorText"
+            android:textColor="@color/colorText"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -52,7 +57,10 @@
             android:ems="10"
             android:id="@+id/editTextCont"
             android:textAlignment="viewStart"
-            android:hint="Contraseña" />
+            android:hint="Contraseña"
+            android:backgroundTint="@color/colorEditTextBorderlinePass"
+            android:textColorHint="@color/colorText"
+            android:textColor="@color/colorText"/>
 
         <Button
             android:text="Iniciar Sesión"
@@ -60,14 +68,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/button"
             android:elevation="0dp"
-            android:onClick="doLoginButtonClick"/>
+            android:onClick="doLoginButtonClick"
+            android:textColor="@color/colorPrimary"/>
 
         <Button
             android:text="Salir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button11"
-            android:onClick="salirButtonClick" />
+            android:onClick="salirButtonClick"
+            android:textColor="@color/colorPrimary"/>
 
     </LinearLayout>
 

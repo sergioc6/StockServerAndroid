@@ -10,8 +10,17 @@
         android:id="@+id/textView5"
         android:textSize="24sp"
         android:textStyle="normal|bold"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:textColor="@android:color/background_dark"
         android:textAlignment="center" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#000000">
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -36,12 +45,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button13"
-        android:onClick="consultarOtroInsumoClick" />
+        android:onClick="consultarOtroInsumoClick"
+        android:textColor="@color/colorPrimary"/>
 
     <Button
         android:text="Volver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button15"
-        android:onClick="volverPrincipalClick" />
+        android:onClick="volverPrincipalClick"
+        android:textColor="@color/colorPrimary"/>
 </LinearLayout>
