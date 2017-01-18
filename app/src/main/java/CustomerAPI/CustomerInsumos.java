@@ -10,10 +10,13 @@ import android.text.Editable;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
@@ -25,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,19 +64,16 @@ public class CustomerInsumos extends CustomerAPI {
     public void insertarInsumo(String nombre_insumo, String descripcion, int stock_min, int stock_max, String sector, String tipo_insumo) throws JSONException {
         //Armo el Json
         JSONObject json = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
-
         json.put("nombre_insumo", nombre_insumo);
         json.put("descripcion", descripcion);
-        json.put("stock_min", stock_min);
-        json.put("stock_max", stock_max);
+        json.put("stock_min", Integer.toString(stock_min));
+        json.put("stock_max", Integer.toString(stock_max));
         json.put("sector", sector);
         json.put("tipo_insumo", tipo_insumo);
 
-        jsonArray.put(json);
 
         //Genero la Petición
-        JsonObjectRequest jsArrayRequest = new JsonObjectRequest(
+        JsonObjectRequest jsObjectRequest = new JsonObjectRequest(
                 Request.Method.POST, // init método
                 this.URL_BASE + insertar_insumo, // URL API
                 json, // Parámetos a enviar en el POST
@@ -85,6 +86,8 @@ public class CustomerInsumos extends CustomerAPI {
                 new Response.ErrorListener() { //Tratamiento del error
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
+
                         Toast.makeText(mContext, "¡Error al insertar el nuevo insumo!", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -95,13 +98,29 @@ public class CustomerInsumos extends CustomerAPI {
                 params.put("Content-Type", "application/json;charset=UTF-8");
                 params.put("Accept", "application/json");
                 params.put("token", token);
-                return params;
+                return params;}
+
+            //Sobreescribo el metodo porque el servidor no devuelve un JSON.
+            @Override
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                    try {
+                        String jsonString = new String(response.data, HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET));
+                        JSONObject result = null;
+                        if (jsonString != null && jsonString.length() > 0)
+                            result = new JSONObject(jsonString);
+                        return Response.success(result, HttpHeaderParser.parseCacheHeaders(response));
+                    } catch (UnsupportedEncodingException e) {
+                        return Response.error(new ParseError(e));
+                    } catch (JSONException je) {
+                        return Response.error(new ParseError(je));
+                    }
             }
+
         };
 
         //Agrego la Petición a la cola de peticiones
         RequestQueue queue = CustomerSingleton.getInstance(this.mContext).getRequestQueue();
-        queue.add(jsArrayRequest);
+        queue.add(jsObjectRequest);
     }
 
     public void obtenerSectoresInsumosYTiposInsumos() {
