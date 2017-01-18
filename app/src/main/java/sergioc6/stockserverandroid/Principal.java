@@ -58,6 +58,12 @@ public class Principal extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void obtenerSectorClick(View v)
+    {
+        Intent intent = new Intent(this, ObtenerSector.class);
+        startActivity(intent);
+    }
+
 
     public void cerrarSesionClick (View v) {
         TokenApplication tokenApp = TokenApplication.getInstance();

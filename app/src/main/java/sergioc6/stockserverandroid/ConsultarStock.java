@@ -48,7 +48,7 @@ public class ConsultarStock extends AppCompatActivity implements ZXingScannerVie
     @Override
     public void onPause() {
         super.onPause();
-        mScannerView.stopCamera();   // Stop camera on pause<br />
+        mScannerView.stopCamera();   // Stop camera on pause
     }
 
     @Override

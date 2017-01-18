@@ -4,16 +4,16 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Consultar Stock Disponible"
+        android:text="Obtener Sector de depósito"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView5"
+        android:id="@+id/textView2"
         android:textSize="24sp"
         android:textStyle="normal|bold"
-        android:textColor="@android:color/background_dark"
         android:textAlignment="center"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:textColor="@android:color/background_dark" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -27,47 +27,28 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/editTextCodIns"
+        android:id="@+id/editTextCodInsumoDeposito"
         android:hint="Ingrese el código del insumo"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"/>
 
     <Button
-        android:text="Consultar Stock"
+        android:text="Buscar Sector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button13"
-        android:onClick="consultarStockManualClick"
-        android:textColor="@color/colorPrimary"/>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:background="#000000">
-    </LinearLayout>
-
-    <Button
-        android:text="Leer código QR de Insumo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button14"
-        android:onClick="consultarScanQR"
-        android:textColor="@color/colorPrimary"/>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:background="#000000">
-    </LinearLayout>
+        android:id="@+id/buttonBuscarSector"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:onClick="buscarSectorClick"/>
 
     <Button
         android:text="Volver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button15"
+        android:id="@+id/buttonVolver"
         android:onClick="volverClick"
-        android:textColor="@color/colorPrimary"/>
+        />
+
+
 
 </LinearLayout>

@@ -65,12 +65,13 @@
         />
 
     <Button
-        android:text="Cerrar Sesión"
+        android:text="Obtener Sector de Insumo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonCerrarSesion"
-        android:onClick="cerrarSesionClick"
-        android:textColor="@color/colorPrimary"/>
+        android:id="@+id/buttonObtenerSector"
+        android:onClick="obtenerSectorClick"
+        android:textColor="@color/colorPrimary"
+        />
 
     <ImageView
         android:layout_width="match_parent"
@@ -78,4 +79,12 @@
         android:src="@mipmap/stockserver_logo"
         android:id="@+id/imageView"
         android:layout_weight="0.55" />
+
+    <Button
+        android:text="Cerrar Sesión"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonCerrarSesion"
+        android:onClick="cerrarSesionClick"
+        android:textColor="@color/colorPrimary"/>
 </LinearLayout>
