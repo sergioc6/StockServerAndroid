@@ -1,14 +1,19 @@
 package sergioc6.stockserverandroid;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
+import android.widget.ImageView;
 
 import org.json.JSONException;
 
 import CustomerAPI.CustomerInsumos;
 import CustomerAPI.CustomerProveedores;
+import DTOs.TokenDTO;
 
 /**
  * Created by SergioC on 09/01/2017.
@@ -16,14 +21,20 @@ import CustomerAPI.CustomerProveedores;
 
 public class Principal extends AppCompatActivity {
 
-    //ATRIBUTOS
-
 
     //METODOS
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+
+        TokenApplication tokenApp = TokenApplication.getInstance();
+
+        //Cargo la imagen
+        ImageView imageViewUsuario = (ImageView) findViewById(R.id.imageViewUsuario);
+        byte[] decodedString = Base64.decode(tokenApp.getFotouser_base64(), Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        imageViewUsuario.setImageBitmap(decodedByte);
     }
 
 

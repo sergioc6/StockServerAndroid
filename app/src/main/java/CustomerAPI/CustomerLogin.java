@@ -56,10 +56,8 @@ public class CustomerLogin extends CustomerAPI {
     public void doLogin (String usuario, String pass) throws JSONException {
         //Armo el Json
         JSONObject json = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
         json.put("usuario",usuario);
         json.put("pass", pass);
-        jsonArray.put(json);
 
         //Genero la Petición
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(
@@ -78,7 +76,8 @@ public class CustomerLogin extends CustomerAPI {
 
                         TokenApplication tokenApp = TokenApplication.getInstance();
                         tokenApp.setTokenGlobal(token.getToken());
-                        cargarPrincipal(token.getToken());
+                        tokenApp.setFotouser_base64(token.getFoto_base64());
+                        cargarPrincipal(token);
                     }
                 },
                 new Response.ErrorListener() { //Tratamiento del error
@@ -98,7 +97,7 @@ public class CustomerLogin extends CustomerAPI {
         queue.add(jsObjRequest);
     }
 
-    public void cargarPrincipal(String token) {
+    public void cargarPrincipal(TokenDTO token) {
         Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.Principal.class);
         myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         myIntent.putExtra("token", token);

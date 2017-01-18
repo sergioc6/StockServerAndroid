@@ -23,6 +23,13 @@
     </LinearLayout>
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@mipmap/stockserver_logo"
+        android:id="@+id/imageViewUsuario"
+        android:layout_weight="0.55" />
+
     <Button
         android:text="Obtener listado de proveedores"
         android:layout_width="match_parent"
@@ -72,13 +79,6 @@
         android:onClick="obtenerSectorClick"
         android:textColor="@color/colorPrimary"
         />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:src="@mipmap/stockserver_logo"
-        android:id="@+id/imageView"
-        android:layout_weight="0.55" />
 
     <Button
         android:text="Cerrar Sesión"

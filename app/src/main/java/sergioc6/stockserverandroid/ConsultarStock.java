@@ -1,5 +1,6 @@
 package sergioc6.stockserverandroid;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -20,9 +21,8 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
  * Created by SergioC on 12/01/2017.
  */
 
-public class ConsultarStock extends AppCompatActivity implements ZXingScannerView.ResultHandler {
+public class ConsultarStock extends AppCompatActivity  {
 
-    private ZXingScannerView mScannerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,35 +34,30 @@ public class ConsultarStock extends AppCompatActivity implements ZXingScannerVie
         TokenApplication token = TokenApplication.getInstance();
         EditText editTextCodIns   = (EditText)findViewById(R.id.editTextCodIns);
 
-        CustomerInsumos customerInsumos = new CustomerInsumos(token.getTokenGlobal(), getApplicationContext());
-        customerInsumos.consultarStockDeInsumo(editTextCodIns.getText().toString());
+        if (editTextCodIns.getText().length() > 0) {
+            CustomerInsumos customerInsumos = new CustomerInsumos(token.getTokenGlobal(), getApplicationContext());
+            customerInsumos.consultarStockDeInsumo(editTextCodIns.getText().toString());
+        } else {
+            AlertDialog alertDialog = new AlertDialog.Builder(ConsultarStock.this).create();
+            alertDialog.setTitle("Código de Insumo requerido!");
+            alertDialog.setMessage("Por favor ingrese el código del insumo del cual que desea obtener su ubicación.");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
+
     }
 
     public void consultarScanQR (View v) {
-       mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
-       setContentView(mScannerView);
-       mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
-       mScannerView.startCamera(0);
+        Intent intent = new Intent(this, ConsultarStockQR.class);
+        startActivity(intent);
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mScannerView.stopCamera();   // Stop camera on pause
-    }
 
-    @Override
-    public void handleResult(Result rawResult) {
-        TokenApplication token = TokenApplication.getInstance();
-        try {
-            CustomerInsumos customerInsumos = new CustomerInsumos(token.getTokenGlobal(), getApplicationContext());
-            customerInsumos.consultarStockDeInsumo(rawResult.getText());
-        }
-        catch (JSONException jsExc)
-            {
-
-        }
-    }
 
 
     public void volverClick (View v) {

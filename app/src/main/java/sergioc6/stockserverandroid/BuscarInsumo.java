@@ -1,7 +1,9 @@
 package sergioc6.stockserverandroid;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -32,8 +34,21 @@ public class BuscarInsumo extends AppCompatActivity {
         TokenApplication token = TokenApplication.getInstance();
         EditText editTextCodInsABuscar   = (EditText) findViewById(R.id.editTextCodInsABuscar);
 
-        CustomerInsumos customerInsumos = new CustomerInsumos(token.getTokenGlobal(), getApplicationContext());
-        customerInsumos.buscarInsumo(editTextCodInsABuscar.getText().toString());
+        if (editTextCodInsABuscar.getText().length() > 0) {
+            CustomerInsumos customerInsumos = new CustomerInsumos(token.getTokenGlobal(), getApplicationContext());
+            customerInsumos.buscarInsumo(editTextCodInsABuscar.getText().toString());
+        } else {
+            AlertDialog alertDialog = new AlertDialog.Builder(BuscarInsumo.this).create();
+            alertDialog.setTitle("Código de Insumo requerido!");
+            alertDialog.setMessage("Por favor ingrese el código del insumo que desea obtener.");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
     }
 
 
