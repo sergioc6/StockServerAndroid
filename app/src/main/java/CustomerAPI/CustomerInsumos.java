@@ -87,7 +87,6 @@ public class CustomerInsumos extends CustomerAPI {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
-
                         Toast.makeText(mContext, "¡Error al insertar el nuevo insumo!", Toast.LENGTH_SHORT).show();
                     }
                 }
