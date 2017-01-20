@@ -77,7 +77,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/button11"
             android:onClick="salirButtonClick"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/viewfinder_laser"
+             />
 
     </LinearLayout>
 

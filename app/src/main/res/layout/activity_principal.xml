@@ -88,5 +88,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonCerrarSesion"
         android:onClick="cerrarSesionClick"
-        android:textColor="@color/colorPrimary"/>
+        android:textColor="@color/viewfinder_laser"/>
 </LinearLayout>

@@ -29,6 +29,7 @@
         android:ems="10"
         android:id="@+id/editTextCodInsABuscar"
         android:hint="Ingrese el código del insumo"
+        android:backgroundTint="@color/colorPrimary"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"/>
 

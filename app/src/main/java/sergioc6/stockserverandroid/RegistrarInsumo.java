@@ -37,7 +37,7 @@ public class RegistrarInsumo extends AppCompatActivity {
         for (SectorDTO sector: listSectores) {
             listaSectoresStrings.add(sector.getSector_deposito());
         }
-        ArrayAdapter<String> adapterSectores = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listaSectoresStrings);
+        ArrayAdapter<String> adapterSectores = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaSectoresStrings);
         adapterSectores.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinnerSectores = (Spinner) findViewById(R.id.spinnerSectorInsumo);
         spinnerSectores.setAdapter(adapterSectores);
@@ -46,7 +46,7 @@ public class RegistrarInsumo extends AppCompatActivity {
         for (TipoInsumoDTO tipo: listTiposInsumos) {
             listaTiposStrings.add(tipo.getTipo());
         }
-        ArrayAdapter<String> adapterTipos = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listaTiposStrings);
+        ArrayAdapter<String> adapterTipos = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaTiposStrings);
         adapterSectores.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinnerTipos = (Spinner) findViewById(R.id.spinnerTipoInsumo);
         spinnerTipos.setAdapter(adapterTipos);

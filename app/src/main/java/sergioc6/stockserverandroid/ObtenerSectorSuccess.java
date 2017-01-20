@@ -18,6 +18,8 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+
 import DTOs.SectorDTO;
 
 /**
@@ -27,7 +29,7 @@ import DTOs.SectorDTO;
 public class ObtenerSectorSuccess extends AppCompatActivity {
 
     private SectorDTO sector;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,8 +74,6 @@ public class ObtenerSectorSuccess extends AppCompatActivity {
             //cargarUbicacionActual(location);
 
         }
-
-
     }
 
 

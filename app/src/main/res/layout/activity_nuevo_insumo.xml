@@ -28,6 +28,7 @@
         android:inputType="textPersonName"
         android:hint="Nombre del insumo"
         android:ems="10"
+        android:backgroundTint="@color/colorPrimary"
         android:id="@+id/editNombreInsumo"
         android:layout_marginTop="3dip"/>
 
@@ -36,6 +37,7 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
+        android:backgroundTint="@color/colorPrimary"
         android:id="@+id/editDescripcionInsumo"
         android:hint="Descripción del insumo"
         android:layout_marginTop="3dip"/>
@@ -45,6 +47,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
+        android:backgroundTint="@color/colorPrimary"
         android:hint="Stock mínimo"
         android:id="@+id/editStockMinimo"
         android:layout_marginTop="10dip"/>
@@ -54,6 +57,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
+        android:backgroundTint="@color/colorPrimary"
         android:hint="Stock máximo"
         android:id="@+id/editStockMaximo"
         android:layout_marginTop="10dip"/>
@@ -63,7 +67,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:textColor="@android:color/background_dark"
-        android:text="@string/tipo_insumo"
+        android:text="Seleccione el tipo de insumo:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView5"
@@ -76,12 +80,13 @@
         android:id="@+id/spinnerTipoInsumo"
         android:layout_marginTop="5dip"
         android:layout_marginBottom="5dp"
+        android:backgroundTint="@color/colorPrimary"
         />
 
     <TextView
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/sector_insumo"
+        android:text="Seleccione el sector de depósito:"
         android:textSize="16sp"
         android:textColor="@android:color/background_dark"
         android:layout_width="match_parent"
@@ -93,6 +98,7 @@
         android:spinnerMode="dropdown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
         android:id="@+id/spinnerSectorInsumo"
         android:layout_marginTop="5dip"
         android:layout_marginBottom="5dp"

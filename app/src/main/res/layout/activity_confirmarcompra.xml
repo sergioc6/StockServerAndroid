@@ -41,6 +41,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:ems="10"
+        android:backgroundTint="@color/colorPrimary"
         android:id="@+id/editTextNumeroOC" />
 
     <Button
