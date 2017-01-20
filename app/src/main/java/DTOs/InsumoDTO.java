@@ -14,7 +14,9 @@ public class InsumoDTO implements Serializable {
     private String stock_min;
     private String stock_max;
     private String id_tipoinsumo;
+    private String tipo;
     private String id_sector;
+    private String sector_deposito;
     private String cantidad;
 
     public InsumoDTO(String id_insumo, String nombre_insumo, String descripcion, String stock_min, String stock_max, String id_tipoinsumo, String id_sector, String cantidad) {
@@ -26,6 +28,17 @@ public class InsumoDTO implements Serializable {
         this.id_tipoinsumo = id_tipoinsumo;
         this.id_sector = id_sector;
         this.cantidad = cantidad;
+    }
+
+    @Override
+    public String toString() {
+        return  "Cód. Insumo: " + id_insumo + ".\n" +
+                "Nombre Insumo: " + nombre_insumo + ".\n" +
+                "Descripción: " + descripcion + ".\n" +
+                "Stock Min: " + stock_min + ".\n" +
+                "Stock Max: " + stock_max + ".\n" +
+                "Tipo de Insumo: " + tipo + ".\n" +
+                "Sector en Depósito: " + sector_deposito + ".\n";
     }
 
     public String getId_insumo() {
@@ -90,5 +103,21 @@ public class InsumoDTO implements Serializable {
 
     public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getSector_deposito() {
+        return sector_deposito;
+    }
+
+    public void setSector_deposito(String sector_deposito) {
+        this.sector_deposito = sector_deposito;
     }
 }

@@ -80,7 +80,14 @@ public class CustomerInsumos extends CustomerAPI {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(mContext, "¡Insumo insertado con éxito", Toast.LENGTH_SHORT).show();
+                        JsonParser parser = new JsonParser();
+                        JsonElement mJson = parser.parse(response.toString());
+                        Gson gson = new Gson();
+
+                        Type collectionType = new TypeToken<InsumoDTO>() {}.getType();
+
+                        InsumoDTO insumoIngresado = gson.fromJson(mJson, collectionType);
+                        cargarActivityRegistrarInsumoSuccess(insumoIngresado);
                     }
                 },
                 new Response.ErrorListener() { //Tratamiento del error
@@ -116,11 +123,21 @@ public class CustomerInsumos extends CustomerAPI {
             }
 
         };
-
         //Agrego la Petición a la cola de peticiones
         RequestQueue queue = CustomerSingleton.getInstance(this.mContext).getRequestQueue();
         queue.add(jsObjectRequest);
     }
+
+
+    private void cargarActivityRegistrarInsumoSuccess (InsumoDTO insumo) {
+        Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.RegistrarInsumoSuccess.class);
+        myIntent.putExtra("Insumo", insumo);
+        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(myIntent);
+    }
+
+
+
 
     public void obtenerSectoresInsumosYTiposInsumos() {
         //Genero la Petición

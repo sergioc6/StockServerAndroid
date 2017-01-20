@@ -1,7 +1,9 @@
 package sergioc6.stockserverandroid;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,6 +20,9 @@ import CustomerAPI.CustomerInsumos;
 import DTOs.ProveedorDTO;
 import DTOs.SectorDTO;
 import DTOs.TipoInsumoDTO;
+
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 /**
  * Created by Nahuel on 10/1/2017.
