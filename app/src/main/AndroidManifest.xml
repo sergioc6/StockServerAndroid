@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sergioc6.stockserverandroid">
 
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="16" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +31,12 @@
         <activity android:label="@string/app_name" android:screenOrientation="portrait" android:noHistory = "true" android:name=".BuscarInsumo"/>
         <activity android:label="@string/app_name" android:screenOrientation="portrait" android:noHistory = "true" android:name=".BuscarInsumoSuccess"/>
         <activity android:label="@string/app_name" android:screenOrientation="portrait" android:noHistory = "true" android:name=".ObtenerSector"/>
-        <activity android:label="@string/app_name" android:screenOrientation="portrait" android:noHistory = "true" android:name=".ObtenerSectorSuccess"/>
+        <activity android:label="@string/app_name" android:screenOrientation="portrait" android:noHistory = "true" android:name=".ObtenerSectorSuccess"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
     </application>
 
@@ -38,7 +46,7 @@
     <uses-permission android:name="android.permission.CAMERA.AUTOFOCUS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
 
     <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
     <uses-feature android:name="android.hardware.location.gps" />
