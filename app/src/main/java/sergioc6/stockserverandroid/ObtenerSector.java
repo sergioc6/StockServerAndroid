@@ -1,5 +1,6 @@
 package sergioc6.stockserverandroid;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import org.json.JSONException;
 
 import CustomerAPI.CustomerInsumos;
+import Token.TokenApplication;
 
 /**
  * Created by SergioC on 17/01/2017.
@@ -30,8 +32,12 @@ public class ObtenerSector extends AppCompatActivity {
         EditText editTextCodIns   = (EditText)findViewById(R.id.editTextCodInsumoDeposito);
 
         if (editTextCodIns.getText().length() != 0) {
+            ProgressDialog progressDialog;
+            progressDialog = ProgressDialog.show(this, "Buscando sector",
+                    "Espere por favor...", true);
+
             CustomerInsumos customerInsumos = new CustomerInsumos(token.getTokenGlobal(), getApplicationContext());
-            customerInsumos.obtenerSectorInsumo(editTextCodIns.getText().toString());
+            customerInsumos.obtenerSectorInsumo(editTextCodIns.getText().toString(), progressDialog);
         }
         else {
             AlertDialog alertDialog = new AlertDialog.Builder(ObtenerSector.this).create();

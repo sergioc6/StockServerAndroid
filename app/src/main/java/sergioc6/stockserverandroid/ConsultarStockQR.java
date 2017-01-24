@@ -1,5 +1,6 @@
 package sergioc6.stockserverandroid;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -8,6 +9,7 @@ import com.google.zxing.Result;
 import org.json.JSONException;
 
 import CustomerAPI.CustomerInsumos;
+import Token.TokenApplication;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 /**
@@ -40,8 +42,12 @@ public class ConsultarStockQR extends AppCompatActivity implements ZXingScannerV
     public void handleResult(Result rawResult) {
         TokenApplication token = TokenApplication.getInstance();
         try {
+            ProgressDialog progressDialog;
+            progressDialog = ProgressDialog.show(this, "Buscando insumo",
+                    "Espere por favor...", true);
+
             CustomerInsumos customerInsumos = new CustomerInsumos(token.getTokenGlobal(), getApplicationContext());
-            customerInsumos.consultarStockDeInsumo(rawResult.getText());
+            customerInsumos.consultarStockDeInsumoQR(rawResult.getText(), progressDialog);
         }
         catch (JSONException jsExc)
         {

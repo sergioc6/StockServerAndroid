@@ -1,5 +1,6 @@
 package sergioc6.stockserverandroid;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.widget.EditText;
 import org.json.JSONException;
 
 import CustomerAPI.CustomerCompras;
-import CustomerAPI.CustomerProveedores;
+import Token.TokenApplication;
 
 /**
  * Created by SergioC on 10/01/2017.
@@ -36,11 +37,15 @@ public class Compras extends AppCompatActivity {
         EditText mEditTextNumOC  = (EditText)findViewById(R.id.editTextNumeroOC);
 
         if (mEditTextNumOC.getText().length() > 0) {
+            ProgressDialog progressDialog;
+            progressDialog = ProgressDialog.show(this, "Buscando la Compra",
+                    "Espere por favor...", true);
+
             //obtengo el Token Global
             TokenApplication tokenApp = TokenApplication.getInstance();
 
             CustomerCompras customerCompras = new CustomerCompras(tokenApp.getTokenGlobal(), getApplicationContext());
-            customerCompras.confirmarRecepcionCompra(mEditTextNumOC.getText().toString());
+            customerCompras.confirmarRecepcionCompra(mEditTextNumOC.getText().toString(), progressDialog);
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(Compras.this).create();
             alertDialog.setTitle("Nª de Orden de Compra requerido!");

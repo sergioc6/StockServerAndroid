@@ -4,9 +4,9 @@ package CustomerAPI;
  * Created by Nahuel on 10/1/2017.
  */
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.text.Editable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -32,14 +32,10 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import DTOs.InsumoDTO;
-import DTOs.ProveedorDTO;
 import DTOs.SectorDTO;
 import DTOs.TipoInsumoDTO;
-import DTOs.TokenDTO;
-import sergioc6.stockserverandroid.TokenApplication;
 
 import static android.content.ContentValues.TAG;
 
@@ -139,7 +135,7 @@ public class CustomerInsumos extends CustomerAPI {
 
 
 
-    public void obtenerSectoresInsumosYTiposInsumos() {
+    public void obtenerSectoresInsumosYTiposInsumos(final ProgressDialog progressDialog) {
         //Genero la Petición
         JsonArrayRequest jsArrayRequest = new JsonArrayRequest(
                 Request.Method.POST, // init método
@@ -148,6 +144,8 @@ public class CustomerInsumos extends CustomerAPI {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        progressDialog.dismiss();
+
                         JsonParser parser = new JsonParser();
                         JsonElement mJson = parser.parse(response.toString());
                         Gson gson = new Gson();
@@ -162,6 +160,8 @@ public class CustomerInsumos extends CustomerAPI {
                 new Response.ErrorListener() { //Tratamiento del error
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
                         Toast.makeText(mContext, "¡Error al obtener Sectores!", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -224,7 +224,7 @@ public class CustomerInsumos extends CustomerAPI {
         queue.add(jsArrayRequest);
     }
 
-    public void cargarVistaRegistrarInsumo(ArrayList<SectorDTO> listaObtenidaSectores, ArrayList<TipoInsumoDTO> listaObtenidaTipos) {
+    private void cargarVistaRegistrarInsumo(ArrayList<SectorDTO> listaObtenidaSectores, ArrayList<TipoInsumoDTO> listaObtenidaTipos) {
         Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.RegistrarInsumo.class);
         myIntent.putExtra("ListSectores", listaObtenidaSectores);
         myIntent.putExtra("ListTiposInsumos", listaObtenidaTipos);
@@ -233,7 +233,7 @@ public class CustomerInsumos extends CustomerAPI {
     }
 
 
-    public void consultarStockDeInsumo(String codigoInsumo) throws JSONException {
+    public void consultarStockDeInsumo(String codigoInsumo, final ProgressDialog progressDialog) throws JSONException {
         //Armo el Json
         JSONObject json = new JSONObject();
         json.put("cod_insumo", codigoInsumo);
@@ -246,6 +246,8 @@ public class CustomerInsumos extends CustomerAPI {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+
                         JsonParser mParser = new JsonParser();
                         JsonElement mJson = mParser.parse(response.toString());
                         Gson gson = new Gson();
@@ -259,6 +261,8 @@ public class CustomerInsumos extends CustomerAPI {
                 new Response.ErrorListener() { //Tratamiento del error
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
                         Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
                         Toast.makeText(mContext, "Error enviando la solicitud al Servidor!", Toast.LENGTH_LONG).show();
                     }
@@ -279,7 +283,62 @@ public class CustomerInsumos extends CustomerAPI {
         queue.add(jsObjRequest);
     }
 
-    public void buscarInsumo(String codigoInsumo) throws JSONException {
+    public void consultarStockDeInsumoQR(String codigoInsumo, final ProgressDialog progressDialog) throws JSONException {
+        //Armo el Json
+        JSONObject json = new JSONObject();
+        json.put("cod_insumo", codigoInsumo);
+
+        //Genero la Petición
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(
+                Request.Method.POST, // init método
+                this.URL_BASE + consultar_stock, // URL API
+                json, // Parámetos a enviar en el POST
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+
+                        JsonParser mParser = new JsonParser();
+                        JsonElement mJson = mParser.parse(response.toString());
+                        Gson gson = new Gson();
+
+                        Type collectionType = new TypeToken<InsumoDTO>() {}.getType();
+
+                        InsumoDTO insumoObtenido = gson.fromJson(mJson, collectionType);
+                        mostrarCantidadInsumoObtenido (insumoObtenido);
+                    }
+                },
+                new Response.ErrorListener() { //Tratamiento del error
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
+                        Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.ConsultarStockFailed.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(myIntent);
+
+                        Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
+                        Toast.makeText(mContext, "Error enviando la solicitud al Servidor!", Toast.LENGTH_LONG).show();
+                    }
+                }
+        ) {//Seteo los headers
+            @Override
+            public HashMap<String, String> getHeaders() {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json;charset=UTF-8");
+                params.put("Accept", "application/json");
+                params.put("token", token);
+                return params;
+            }
+        };
+
+        //Agrego la Petición a la cola de peticiones
+        RequestQueue queue = CustomerSingleton.getInstance(mContext).getRequestQueue();
+        queue.add(jsObjRequest);
+    }
+
+
+    public void buscarInsumo(String codigoInsumo, final ProgressDialog progressDialog) throws JSONException {
         //Armo el Json
         JSONObject json = new JSONObject();
         json.put("cod_insumo", codigoInsumo);
@@ -292,6 +351,8 @@ public class CustomerInsumos extends CustomerAPI {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+
                         JsonParser mParser = new JsonParser();
                         JsonElement mJson = mParser.parse(response.toString());
                         Gson gson = new Gson();
@@ -305,6 +366,8 @@ public class CustomerInsumos extends CustomerAPI {
                 new Response.ErrorListener() { //Tratamiento del error
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
                         Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
                         Toast.makeText(mContext, "Error enviando la solicitud al Servidor!", Toast.LENGTH_LONG).show();
                     }
@@ -325,14 +388,69 @@ public class CustomerInsumos extends CustomerAPI {
         queue.add(jsObjRequest);
     }
 
-    public void mostrarCantidadInsumoObtenido(InsumoDTO insumo) {
+    public void buscarInsumoQR(String codigoInsumo, final ProgressDialog progressDialog) throws JSONException {
+        //Armo el Json
+        JSONObject json = new JSONObject();
+        json.put("cod_insumo", codigoInsumo);
+
+        //Genero la Petición
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(
+                Request.Method.POST, // init método
+                this.URL_BASE + buscar_insumo + codigoInsumo, // URL API
+                json, // Parámetos a enviar en el POST
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+
+                        JsonParser mParser = new JsonParser();
+                        JsonElement mJson = mParser.parse(response.toString());
+                        Gson gson = new Gson();
+
+                        Type collectionType = new TypeToken<InsumoDTO>() {}.getType();
+
+                        InsumoDTO insumoObtenido = gson.fromJson(mJson, collectionType);
+                        mostrarDatosInsumoEncontrado(insumoObtenido);
+                    }
+                },
+                new Response.ErrorListener() { //Tratamiento del error
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
+                        Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.BuscarInsumoFailed.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(myIntent);
+
+                        Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
+                        Toast.makeText(mContext, "Error enviando la solicitud al Servidor!", Toast.LENGTH_LONG).show();
+                    }
+                }
+        ) {//Seteo los headers
+            @Override
+            public HashMap<String, String> getHeaders() {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json;charset=UTF-8");
+                params.put("Accept", "application/json");
+                params.put("token", token);
+                return params;
+            }
+        };
+
+        //Agrego la Petición a la cola de peticiones
+        RequestQueue queue = CustomerSingleton.getInstance(mContext).getRequestQueue();
+        queue.add(jsObjRequest);
+    }
+
+
+    private void mostrarCantidadInsumoObtenido(InsumoDTO insumo) {
         Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.ConsultarStockSuccess.class);
         myIntent.putExtra("Insumo", insumo);
         myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(myIntent);
     }
 
-    public void mostrarDatosInsumoEncontrado(InsumoDTO insumo)
+    private void mostrarDatosInsumoEncontrado(InsumoDTO insumo)
     {
         Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.BuscarInsumoSuccess.class);
         myIntent.putExtra("Insumo", insumo);
@@ -340,7 +458,7 @@ public class CustomerInsumos extends CustomerAPI {
         mContext.startActivity(myIntent);
     }
 
-    public void obtenerSectorInsumo(String codigoInsumo) throws JSONException {
+    public void obtenerSectorInsumo(String codigoInsumo, final ProgressDialog progressDialog) throws JSONException {
         //Armo el Json
         JSONObject json = new JSONObject();
         json.put("cod_insumo", codigoInsumo);
@@ -353,6 +471,8 @@ public class CustomerInsumos extends CustomerAPI {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+
                         JsonParser mParser = new JsonParser();
                         JsonElement mJson = mParser.parse(response.toString());
                         Gson gson = new Gson();
@@ -366,6 +486,64 @@ public class CustomerInsumos extends CustomerAPI {
                 new Response.ErrorListener() { //Tratamiento del error
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
+                        Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
+                        Toast.makeText(mContext, "Error al obtener el Sector!", Toast.LENGTH_LONG).show();
+                    }
+                }
+        ) {//Seteo los headers
+            @Override
+            public HashMap<String, String> getHeaders() {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json;charset=UTF-8");
+                params.put("Accept", "application/json");
+                params.put("token", token);
+                return params;
+            }
+        };
+
+        //Agrego la Petición a la cola de peticiones
+        RequestQueue queue = CustomerSingleton.getInstance(mContext).getRequestQueue();
+        queue.add(jsObjRequest);
+    }
+
+
+    public void obtenerSectorInsumoQR(String codigoInsumo, final ProgressDialog progressDialog) throws JSONException {
+        //Armo el Json
+        JSONObject json = new JSONObject();
+        json.put("cod_insumo", codigoInsumo);
+
+        //Genero la Petición
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(
+                Request.Method.POST, // init método
+                this.URL_BASE + obtener_sector_insumo, // URL API
+                json, // Parámetos a enviar en el POST
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+
+                        JsonParser mParser = new JsonParser();
+                        JsonElement mJson = mParser.parse(response.toString());
+                        Gson gson = new Gson();
+
+                        Type collectionType = new TypeToken<SectorDTO>() {}.getType();
+
+                        SectorDTO sectorObtenido = gson.fromJson(mJson, collectionType);
+                        cargarVistaSectorObtenido(sectorObtenido);
+                    }
+                },
+                new Response.ErrorListener() { //Tratamiento del error
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
+
+                        Intent myIntent = new Intent(mContext, sergioc6.stockserverandroid.ObtenerSectorFailed.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(myIntent);
+
                         Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
                         Toast.makeText(mContext, "Error al obtener el Sector!", Toast.LENGTH_LONG).show();
                     }

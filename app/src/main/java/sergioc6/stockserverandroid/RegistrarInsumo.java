@@ -12,17 +12,12 @@ import android.widget.Spinner;
 
 import org.json.JSONException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 import CustomerAPI.CustomerInsumos;
-import DTOs.ProveedorDTO;
 import DTOs.SectorDTO;
 import DTOs.TipoInsumoDTO;
-
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
+import Token.TokenApplication;
 
 /**
  * Created by Nahuel on 10/1/2017.

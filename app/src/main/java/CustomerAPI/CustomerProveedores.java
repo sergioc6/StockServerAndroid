@@ -1,6 +1,7 @@
 package CustomerAPI;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
@@ -42,7 +43,7 @@ public class CustomerProveedores extends CustomerAPI {
         this.mContext = context;
     }
 
-    public void obtenerProveedores () {
+    public void obtenerProveedores (final ProgressDialog progressDialog) {
         //Genero la Petición
         JsonArrayRequest jsArrayRequest = new JsonArrayRequest(
                 Request.Method.POST, // init método
@@ -51,6 +52,8 @@ public class CustomerProveedores extends CustomerAPI {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        progressDialog.dismiss();
+
                         JsonParser parser = new JsonParser();
                         JsonElement mJson =  parser.parse(response.toString());
                         Gson gson = new Gson();
@@ -64,6 +67,8 @@ public class CustomerProveedores extends CustomerAPI {
                 new Response.ErrorListener() { //Tratamiento del error
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
                         Toast.makeText(mContext, "Error enviando la solicitud al Servidor!", Toast.LENGTH_LONG).show();
                     }
                 }

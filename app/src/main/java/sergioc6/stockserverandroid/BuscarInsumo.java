@@ -1,5 +1,6 @@
 package sergioc6.stockserverandroid;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import org.json.JSONException;
 
 import CustomerAPI.CustomerInsumos;
+import Token.TokenApplication;
 
 /**
  * Created by Nahuel on 16/1/2017.
@@ -35,8 +37,12 @@ public class BuscarInsumo extends AppCompatActivity {
         EditText editTextCodInsABuscar   = (EditText) findViewById(R.id.editTextCodInsABuscar);
 
         if (editTextCodInsABuscar.getText().length() > 0) {
+            ProgressDialog progressDialog;
+            progressDialog = ProgressDialog.show(this, "Buscando insumo",
+                    "Espere por favor...", true);
+
             CustomerInsumos customerInsumos = new CustomerInsumos(token.getTokenGlobal(), getApplicationContext());
-            customerInsumos.buscarInsumo(editTextCodInsABuscar.getText().toString());
+            customerInsumos.buscarInsumo(editTextCodInsABuscar.getText().toString(), progressDialog);
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(BuscarInsumo.this).create();
             alertDialog.setTitle("Código de Insumo requerido!");

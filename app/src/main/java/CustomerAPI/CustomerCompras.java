@@ -1,5 +1,6 @@
 package CustomerAPI;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,7 +47,7 @@ public class CustomerCompras extends CustomerAPI{
         this.mContext = context;
     }
 
-    public void confirmarRecepcionCompra (String numeroOrdenCompra) throws JSONException {
+    public void confirmarRecepcionCompra (String numeroOrdenCompra, final ProgressDialog progressDialog) throws JSONException {
         //Armo el JSON
         JSONObject json = new JSONObject();
         json.put("numordencompra",numeroOrdenCompra);
@@ -59,6 +60,8 @@ public class CustomerCompras extends CustomerAPI{
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
+
                         JsonParser parser = new JsonParser();
                         JsonElement mJson =  parser.parse(response.toString());
                         Gson gson = new Gson();
@@ -72,6 +75,8 @@ public class CustomerCompras extends CustomerAPI{
                 new Response.ErrorListener() { //Tratamiento del error
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
                         Toast.makeText(mContext, "¡No se encontro la Orden de Compra! Verifique el número por favor.", Toast.LENGTH_LONG).show();
                     }
                 }

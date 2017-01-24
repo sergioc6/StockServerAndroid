@@ -1,6 +1,4 @@
-package sergioc6.stockserverandroid;
-
-import android.app.Application;
+package Token;
 
 /**
  * Created by SergioC on 10/01/2017.

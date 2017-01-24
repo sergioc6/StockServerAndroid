@@ -2,11 +2,7 @@ package CustomerAPI;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.session.MediaSession;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,28 +10,20 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
-import java.security.Principal;
-import java.util.List;
 
 import DTOs.TokenDTO;
-import sergioc6.stockserverandroid.Login;
-import sergioc6.stockserverandroid.R;
-import sergioc6.stockserverandroid.TokenApplication;
+import Token.TokenApplication;
 
-import static android.R.id.list;
-import static android.R.id.progress;
 import static android.content.ContentValues.TAG;
 
 

@@ -14,6 +14,8 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -23,26 +25,33 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
 import DTOs.SectorDTO;
+
+import static java.sql.Types.NULL;
 
 /**
  * Created by SergioC on 17/01/2017.
  */
 
-public class ObtenerSectorSuccess extends AppCompatActivity implements LocationListener {
+public class ObtenerSectorSuccess extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private SectorDTO sector;
 
     double latitude = 0;
     double longitude = 0;
-    LocationManager locationmanager;
+    GoogleApiClient mGoogleApiClient;
+    LocationRequest mLocationRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,11 +81,43 @@ public class ObtenerSectorSuccess extends AppCompatActivity implements LocationL
         roundedBitmapDrawable.setAntiAlias(true);
         imageViewSector.setImageDrawable(roundedBitmapDrawable);
 
-        locationmanager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria cri = new Criteria();
-        String provider = locationmanager.getBestProvider(cri, false);
-        if (provider != null & !provider.equals("")) {
-            // puede aparecer subrayado en rojo porque le faltaria un control, pero funciona igual
+        // Create an instance of GoogleAPIClient.
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
+
+    public void actualizarUbicacionClick(View v) {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //Checkeo si esta activado el GPS en el dispositivo
+        if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            mostrarAlertActivarGPS();
+        } else {
+            // Create an instance of GoogleAPIClient.
+            if (mGoogleApiClient == null) {
+                mGoogleApiClient = new GoogleApiClient.Builder(this)
+                        .addConnectionCallbacks(this)
+                        .addOnConnectionFailedListener(this)
+                        .addApi(LocationServices.API)
+                        .build();
+            }
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
@@ -87,42 +128,13 @@ public class ObtenerSectorSuccess extends AppCompatActivity implements LocationL
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-            Location location = locationmanager.getLastKnownLocation(provider);
-            locationmanager.requestLocationUpdates(provider,2000,1,new LocationListener() {
-                @Override
-                public void onLocationChanged(Location location) {
-                    latitude = location.getLatitude();
-                    longitude = location.getLongitude();
-                }
-                @Override
-                public void onProviderDisabled(String provider) {
-                    // TODO Auto-generated method stub
-                }
-                @Override
-                public void onProviderEnabled(String provider) {
-                    // TODO Auto-generated method stub
-                }
-                @Override
-                public void onStatusChanged(String provider, int status,
-                                            Bundle extras) {
-                    // TODO Auto-generated method stub
-                }
-            });
-                if(location!=null)
-            {
-                onLocationChanged(location);
+            Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                    mGoogleApiClient);
+            if (mLastLocation != null) {
+                latitude= (mLastLocation.getLatitude());
+                longitude = (mLastLocation.getLongitude());
             }
-        }
-    }
 
-
-    public void actualizarUbicacionClick(View v) {
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        //Checkeo si esta activado el GPS en el dispositivo
-        if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            mostrarAlertActivarGPS();
-        } else {
             Location location = new Location("actual");
             location.setLongitude(getLongitude());
             location.setLatitude(getLatitude());
@@ -149,6 +161,18 @@ public class ObtenerSectorSuccess extends AppCompatActivity implements LocationL
         final AlertDialog alert = builder.create();
         alert.show();
     }
+
+
+    // Usar en cualquier lado del código, es lo que obtiene la lat actualizada
+    public double getLatitude() {
+        return latitude;
+    }
+
+    // Usar en cualquier lado del código, es lo que obtiene la lng actualizada
+    public double getLongitude() {
+        return longitude;
+    }
+
 
     private void cargarUbicacionActual(Location location) {
         //Cargo la latitud
@@ -181,35 +205,33 @@ public class ObtenerSectorSuccess extends AppCompatActivity implements LocationL
         startActivity(intent);
     }
 
-
-
-    //Fuera del onCreate van estos metodos
     @Override
-    public void onLocationChanged(Location location) {
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            latitude= (mLastLocation.getLatitude());
+            longitude = (mLastLocation.getLongitude());
+        }
     }
 
     @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
+    public void onConnectionSuspended(int i) {
+
     }
 
     @Override
-    public void onProviderEnabled(String s) {
-    }
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-    @Override
-    public void onProviderDisabled(String s) {
     }
-
-    // Usar en cualquier lado del código, es lo que obtiene la lat actualizada
-    public double getLatitude() {
-        return latitude;
-    }
-
-    // Usar en cualquier lado del código, es lo que obtiene la lng actualizada
-    public double getLongitude() {
-        return longitude;
-    }
-
 }

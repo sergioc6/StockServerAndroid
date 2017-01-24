@@ -1,21 +1,19 @@
 package sergioc6.stockserverandroid;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 
-import com.google.zxing.Result;
-
 import org.json.JSONException;
 
 import CustomerAPI.CustomerInsumos;
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import Token.TokenApplication;
 
 /**
  * Created by SergioC on 12/01/2017.
@@ -35,8 +33,12 @@ public class ConsultarStock extends AppCompatActivity  {
         EditText editTextCodIns   = (EditText)findViewById(R.id.editTextCodIns);
 
         if (editTextCodIns.getText().length() > 0) {
+            ProgressDialog progressDialog;
+            progressDialog = ProgressDialog.show(this, "Buscando insumo",
+                    "Espere por favor...", true);
+
             CustomerInsumos customerInsumos = new CustomerInsumos(token.getTokenGlobal(), getApplicationContext());
-            customerInsumos.consultarStockDeInsumo(editTextCodIns.getText().toString());
+            customerInsumos.consultarStockDeInsumo(editTextCodIns.getText().toString(), progressDialog);
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(ConsultarStock.this).create();
             alertDialog.setTitle("Código de Insumo requerido!");

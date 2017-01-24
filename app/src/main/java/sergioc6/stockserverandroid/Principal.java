@@ -1,5 +1,6 @@
 package sergioc6.stockserverandroid;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,7 +16,7 @@ import org.json.JSONException;
 
 import CustomerAPI.CustomerInsumos;
 import CustomerAPI.CustomerProveedores;
-import DTOs.TokenDTO;
+import Token.TokenApplication;
 
 /**
  * Created by SergioC on 09/01/2017.
@@ -44,10 +45,14 @@ public class Principal extends AppCompatActivity {
 
 
     public void obtenerListadoProvClick (View v) throws JSONException {
+        ProgressDialog progressDialog;
+        progressDialog = ProgressDialog.show(this, "Buscando Proveedores",
+                "Espere por favor...", true);
+
         TokenApplication tokenApp = TokenApplication.getInstance();
 
         CustomerProveedores customerProveedores = new CustomerProveedores(tokenApp.getTokenGlobal(), getApplicationContext());
-        customerProveedores.obtenerProveedores();
+        customerProveedores.obtenerProveedores(progressDialog);
     }
 
     public void confirmarCompraClick (View v) {
@@ -57,10 +62,14 @@ public class Principal extends AppCompatActivity {
 
 
     public void registrarInsumoNuevoClick (View v) {
+        ProgressDialog progressDialog;
+        progressDialog = ProgressDialog.show(this, "Obteniendo Sectores y Tipos de insumo",
+                "Espere por favor...", true);
+
         TokenApplication tokenApp = TokenApplication.getInstance();
 
         CustomerInsumos customerInsumos = new CustomerInsumos(tokenApp.getTokenGlobal(), getApplicationContext());
-        customerInsumos.obtenerSectoresInsumosYTiposInsumos();
+        customerInsumos.obtenerSectoresInsumosYTiposInsumos(progressDialog);
     }
 
     public void consultarStockClick (View v) {
