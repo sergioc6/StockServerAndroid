@@ -26,8 +26,6 @@ import static java.sql.Types.NULL;
 
 public class Login extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,12 +84,11 @@ public class Login extends AppCompatActivity {
 
 
     public void salirButtonClick (View v) {
-        finish();
-        System.exit(0);
+        this.finishAffinity();
     }
 
 
-    }
+}
 
 
 

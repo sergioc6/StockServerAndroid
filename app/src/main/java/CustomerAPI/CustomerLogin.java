@@ -69,6 +69,7 @@ public class CustomerLogin extends CustomerAPI {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
                         JsonParser mParser = new JsonParser();
                         JsonElement mJson =  mParser.parse(response.toString());
                         Gson gson = new Gson();
