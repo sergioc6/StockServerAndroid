@@ -59,12 +59,6 @@ public class Login extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         });
-                alertDialog.setOnShowListener( new DialogInterface.OnShowListener() {
-                                              @Override
-                                              public void onShow(DialogInterface arg0) {
-                                                  alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
-                                              }
-                                          } );
                 alertDialog.show();
             }
         } else {
@@ -77,12 +71,6 @@ public class Login extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     });
-            alertDialog.setOnShowListener( new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface arg0) {
-                    alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
-                }
-            } );
             alertDialog.show();
         }
 
