@@ -48,7 +48,8 @@
             android:hint="Email del operario"
             android:backgroundTint="@color/colorEditTextBorderlineUser"
             android:textColorHint="@color/colorText"
-            android:textColor="@color/colorText"/>
+            android:textColor="@color/colorText"
+            android:textCursorDrawable="@null"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -60,7 +61,8 @@
             android:hint="Contraseña"
             android:backgroundTint="@color/colorEditTextBorderlinePass"
             android:textColorHint="@color/colorText"
-            android:textColor="@color/colorText"/>
+            android:textColor="@color/colorText"
+            android:textCursorDrawable="@null"/>
 
         <Button
             android:text="Iniciar Sesión"

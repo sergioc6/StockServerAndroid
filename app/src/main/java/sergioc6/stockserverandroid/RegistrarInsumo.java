@@ -61,29 +61,79 @@ public class RegistrarInsumo extends AppCompatActivity {
     }
 
     public void registrarInsumoClick(View v) throws JSONException {
+
         EditText nombreInsumo = (EditText) findViewById(R.id.editNombreInsumo);
-        String pNombreInsumo = nombreInsumo.getText().toString();
+        //String pNombreInsumo = nombreInsumo.getText().toString();
 
         EditText descripcionInsumo = (EditText) findViewById(R.id.editDescripcionInsumo);
-        String pDescripcionInsumo = descripcionInsumo.getText().toString();
+        //String pDescripcionInsumo = descripcionInsumo.getText().toString();
 
         EditText stockMin = (EditText) findViewById(R.id.editStockMinimo);
-        int pStockMin = Integer.parseInt(stockMin.getText().toString());
+        //int pStockMin = Integer.parseInt(stockMin.getText().toString());
 
         EditText stockMax = (EditText) findViewById(R.id.editStockMaximo);
-        int pStockMax = Integer.parseInt(stockMax.getText().toString());
+        //int pStockMax = Integer.parseInt(stockMax.getText().toString());
 
         Spinner spinnerTipoInsumo = (Spinner) findViewById(R.id.spinnerTipoInsumo);
-        String pTipoInsumo = spinnerTipoInsumo.getSelectedItem().toString();
+        //String pTipoInsumo = spinnerTipoInsumo.getSelectedItem().toString();
 
         Spinner spinnerSectorInsumo = (Spinner) findViewById(R.id.spinnerSectorInsumo);
-        String pSectorInsumo = spinnerSectorInsumo.getSelectedItem().toString();
+        //String pSectorInsumo = spinnerSectorInsumo.getSelectedItem().toString();
 
-        TokenApplication tokenApplication = TokenApplication.getInstance();
 
-        CustomerInsumos customerInsumos = new CustomerInsumos(tokenApplication.getTokenGlobal(), getApplicationContext());
-        customerInsumos.insertarInsumo(pNombreInsumo, pDescripcionInsumo, pStockMin, pStockMax, pSectorInsumo, pTipoInsumo);
+        //Chequeo que los campos no sean nulos
+        if (nombreInsumo.getText().length() == 0) {
+            AlertDialog alertDialog = new AlertDialog.Builder(RegistrarInsumo.this).create();
+            alertDialog.setTitle("Nombre de Insumo requerido!");
+            alertDialog.setMessage("Por favor ingrese un nombre para el insumo.");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        } else if (descripcionInsumo.getText().length() == 0) {
+            AlertDialog alertDialog = new AlertDialog.Builder(RegistrarInsumo.this).create();
+            alertDialog.setTitle("Descripción de insumo requerida!");
+            alertDialog.setMessage("Por favor ingrese una descripción para el insumo.");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        } else if (stockMax.getText().length() == 0) {
+            AlertDialog alertDialog = new AlertDialog.Builder(RegistrarInsumo.this).create();
+            alertDialog.setTitle("Stock Máximo requerido!");
+            alertDialog.setMessage("Por favor ingrese un stock máximo.");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        } else if (stockMin.getText().length() == 0) {
+            AlertDialog alertDialog = new AlertDialog.Builder(RegistrarInsumo.this).create();
+            alertDialog.setTitle("Stock Mínimo requerido!");
+            alertDialog.setMessage("Por favor ingrese stock mínimo.");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
 
+        } else {
+            //Envío la petición
+            TokenApplication tokenApplication = TokenApplication.getInstance();
+
+            CustomerInsumos customerInsumos = new CustomerInsumos(tokenApplication.getTokenGlobal(), getApplicationContext());
+            customerInsumos.insertarInsumo(nombreInsumo.getText().toString(), descripcionInsumo.getText().toString(), Integer.parseInt(stockMin.getText().toString()), Integer.parseInt(stockMax.getText().toString()), spinnerSectorInsumo.getSelectedItem().toString(), spinnerTipoInsumo.getSelectedItem().toString());
+        }
     }
 
     public void volverClick (View v) {

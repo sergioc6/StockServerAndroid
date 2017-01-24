@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -39,15 +40,17 @@ public class Login extends AppCompatActivity {
 
         if (this.isValidEmail(mEditTextEmail.getText())) {
             if(mEditTextCont.getText().length() > 0) {
+                //Muestro el ProgressDialog
                 ProgressDialog progressDialog;
                 progressDialog = ProgressDialog.show(this, "Iniciando Sesión",
                         "Espere por favor...", true);
 
+                //Envío la petición.
                 CustomerLogin customerLogin = new CustomerLogin(getApplicationContext());
                 customerLogin.doLogin(mEditTextEmail.getText().toString(), mEditTextCont.getText().toString(), progressDialog);
 
             }else {
-                AlertDialog alertDialog = new AlertDialog.Builder(Login.this).create();
+                final AlertDialog alertDialog = new AlertDialog.Builder(Login.this).create();
                 alertDialog.setTitle("Contraseña requerida!");
                 alertDialog.setMessage("Por favor ingrese una contraseña.");
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
@@ -56,10 +59,16 @@ public class Login extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         });
+                alertDialog.setOnShowListener( new DialogInterface.OnShowListener() {
+                                              @Override
+                                              public void onShow(DialogInterface arg0) {
+                                                  alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
+                                              }
+                                          } );
                 alertDialog.show();
             }
         } else {
-            AlertDialog alertDialog = new AlertDialog.Builder(Login.this).create();
+            final AlertDialog alertDialog = new AlertDialog.Builder(Login.this).create();
             alertDialog.setTitle("Email Inválido!");
             alertDialog.setMessage("Por favor ingrese una dirección de Email correcta.");
             alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
@@ -68,6 +77,12 @@ public class Login extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     });
+            alertDialog.setOnShowListener( new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface arg0) {
+                    alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE);
+                }
+            } );
             alertDialog.show();
         }
 
