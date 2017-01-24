@@ -1,5 +1,6 @@
 package CustomerAPI;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,6 +35,7 @@ import sergioc6.stockserverandroid.R;
 import sergioc6.stockserverandroid.TokenApplication;
 
 import static android.R.id.list;
+import static android.R.id.progress;
 import static android.content.ContentValues.TAG;
 
 
@@ -53,7 +55,7 @@ public class CustomerLogin extends CustomerAPI {
         this.mContext = mContext;
     }
 
-    public void doLogin (String usuario, String pass) throws JSONException {
+    public void doLogin (String usuario, String pass, final ProgressDialog progressDialog) throws JSONException {
         //Armo el Json
         JSONObject json = new JSONObject();
         json.put("usuario",usuario);
@@ -85,6 +87,7 @@ public class CustomerLogin extends CustomerAPI {
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, "Error Respuesta en JSON: " + error.getMessage());
 
+                        progressDialog.dismiss();
                         CharSequence text = "Fallo en el ingreso! Verifique los datos";
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(mContext, text, duration);

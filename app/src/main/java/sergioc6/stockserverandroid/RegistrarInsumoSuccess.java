@@ -42,4 +42,6 @@ public class RegistrarInsumoSuccess extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+
 }

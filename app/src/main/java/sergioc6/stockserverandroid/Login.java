@@ -1,6 +1,7 @@
 package sergioc6.stockserverandroid;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import static java.sql.Types.NULL;
 
 public class Login extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +39,12 @@ public class Login extends AppCompatActivity {
 
         if (this.isValidEmail(mEditTextEmail.getText())) {
             if(mEditTextCont.getText().length() > 0) {
+                ProgressDialog progressDialog;
+                progressDialog = ProgressDialog.show(this, "Iniciando Sesión",
+                        "Espere por favor...", true);
+
                 CustomerLogin customerLogin = new CustomerLogin(getApplicationContext());
-                customerLogin.doLogin(mEditTextEmail.getText().toString(), mEditTextCont.getText().toString());
+                customerLogin.doLogin(mEditTextEmail.getText().toString(), mEditTextCont.getText().toString(), progressDialog);
 
             }else {
                 AlertDialog alertDialog = new AlertDialog.Builder(Login.this).create();
@@ -81,6 +88,8 @@ public class Login extends AppCompatActivity {
     }
 
 
+    }
 
 
-}
+
+
