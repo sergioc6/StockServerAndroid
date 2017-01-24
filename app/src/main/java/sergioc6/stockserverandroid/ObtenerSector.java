@@ -47,8 +47,10 @@ public class ObtenerSector extends AppCompatActivity {
         }
     }
 
-
-
+    public void buscarSectorQRClick (View v) {
+        Intent intent = new Intent(this, ObtenerSectorQR.class);
+        startActivity(intent);
+    }
 
 
 

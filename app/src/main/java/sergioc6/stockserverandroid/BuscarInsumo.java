@@ -51,6 +51,11 @@ public class BuscarInsumo extends AppCompatActivity {
         }
     }
 
+    public void buscarDatosInsumoQRClick (View v) {
+        Intent intent = new Intent(this, BuscarInsumoQR.class);
+        startActivity(intent);
+    }
+
 
 
 }

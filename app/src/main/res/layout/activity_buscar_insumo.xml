@@ -43,6 +43,31 @@
         android:onClick="buscarDatosInsumoClick"
         android:textColor="@color/colorPrimary"/>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#000000">
+    </LinearLayout>
+
+    <Button
+        android:text="Leer código QR de insumo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonBuscarInsumoQR"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:onClick="buscarDatosInsumoQRClick"
+        android:textColor="@color/colorPrimary"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#000000">
+    </LinearLayout>
+
+
     <Button
         android:text="Volver"
         android:layout_width="match_parent"
@@ -50,7 +75,7 @@
         android:id="@+id/buttonVolver"
         android:onClick="volverClick"
         android:textColor="@color/colorPrimary"
-        />
+    />
 
 
 
